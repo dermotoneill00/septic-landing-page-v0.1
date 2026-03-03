@@ -1,4 +1,5 @@
-import { Shield, Phone } from "lucide-react";
+import { Phone } from "lucide-react";
+import logoWhite from "@/assets/logo-white.png";
 
 const serviceStates = [
   "Connecticut", "Massachusetts", "New York", "New Jersey",
@@ -12,12 +13,7 @@ const Footer = () => {
         <div className="grid md:grid-cols-3 gap-10">
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <Shield className="h-6 w-6 text-accent" />
-              <span className="font-display text-xl font-bold text-primary-foreground">
-                ProGuard Plans
-              </span>
-            </div>
+            <img src={logoWhite} alt="ProGuard Plans" className="h-8 mb-4" />
             <p className="text-primary-foreground/70 text-sm leading-relaxed">
               Affordable septic system protection for homeowners across the
               Northeast. No inspections. No hassle. Just peace of mind.
