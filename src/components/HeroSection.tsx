@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { Shield, CheckCircle } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 import heroImage from "@/assets/hero-home.jpg";
+import logoWhite from "@/assets/logo-white.png";
 
 const trustBadges = [
   "No Inspection Required",
@@ -28,12 +29,7 @@ const HeroSection = () => {
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 py-20 lg:py-28">
         <div className="max-w-2xl">
-          <div className="flex items-center gap-2 mb-6">
-            <Shield className="h-6 w-6 text-accent" />
-            <span className="text-accent font-semibold tracking-wide uppercase text-sm">
-              ProGuard Plans
-            </span>
-          </div>
+          <img src={logoWhite} alt="ProGuard" className="h-8 md:h-10 mb-6" />
 
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground leading-tight mb-6">
             One Unexpected Repair Shouldn't Cost You{" "}
