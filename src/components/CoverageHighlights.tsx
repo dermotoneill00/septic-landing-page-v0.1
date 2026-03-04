@@ -1,6 +1,8 @@
 import { Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
+import coverageImage from "@/assets/coverage-home.jpg";
+import technicianImage from "@/assets/technician-work.jpg";
 
 const covered = [
   "Tank & Distribution Box Repair/Replacement",
@@ -38,6 +40,20 @@ const CoverageHighlights = () => {
           <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
             No guesswork. No surprises. Here's exactly what your plan includes.
           </p>
+        </div>
+
+        {/* Image banner */}
+        <div className="max-w-5xl mx-auto mb-12 grid md:grid-cols-2 gap-4 rounded-2xl overflow-hidden shadow-lg">
+          <img
+            src={coverageImage}
+            alt="Beautiful New England colonial home with autumn foliage"
+            className="w-full h-64 md:h-72 object-cover"
+          />
+          <img
+            src={technicianImage}
+            alt="Service technician inspecting septic equipment"
+            className="w-full h-64 md:h-72 object-cover"
+          />
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">

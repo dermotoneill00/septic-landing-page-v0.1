@@ -1,12 +1,23 @@
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import pricingImage from "@/assets/pricing-home.jpg";
 
 const PricingSection = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="py-20 lg:py-28 bg-section-alt">
-      <div className="container mx-auto px-4 text-center">
+    <section className="relative py-20 lg:py-28 overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <img
+          src={pricingImage}
+          alt="Charming New England farmhouse at sunset"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-background/90 backdrop-blur-[2px]" />
+      </div>
+
+      <div className="relative z-10 container mx-auto px-4 text-center">
         <p className="text-secondary font-semibold uppercase tracking-wider text-sm mb-4">
           Comprehensive Protection
         </p>
