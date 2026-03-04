@@ -16,7 +16,7 @@ const HeroTrust = () => {
     <section className="relative min-h-[90vh] flex items-center overflow-hidden">
       <div className="absolute inset-0">
         <img src={heroImage} alt="New England home" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/92 via-primary/78 to-primary/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/75 to-primary/40" />
       </div>
 
       <div className="relative z-10 container mx-auto px-4 py-20 lg:py-28">

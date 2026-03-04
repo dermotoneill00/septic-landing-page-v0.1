@@ -16,7 +16,7 @@ const HeroFear = () => {
     <section className="relative min-h-[90vh] flex items-center overflow-hidden">
       <div className="absolute inset-0">
         <img src={heroImage} alt="Home exterior" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-r from-gray-950/96 via-gray-950/85 to-gray-950/50" />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/80 to-primary/40" />
       </div>
 
       <div className="relative z-10 container mx-auto px-4 py-20 lg:py-28">
