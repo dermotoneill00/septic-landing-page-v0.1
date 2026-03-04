@@ -1,6 +1,5 @@
 import { FileText, Shield, Phone } from "lucide-react";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
-import howItWorksImage from "@/assets/how-it-works.jpg";
 
 const steps = [
   {
@@ -38,40 +37,23 @@ const HowItWorks = () => {
           </h2>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-6xl mx-auto">
-          {/* Image */}
-          <div className="relative rounded-2xl overflow-hidden shadow-xl order-2 lg:order-1">
-            <img
-              src={howItWorksImage}
-              alt="ProGuard service technician greeting homeowners"
-              className="w-full h-[400px] lg:h-[480px] object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent" />
-          </div>
-
-          {/* Steps */}
-          <div className="space-y-8 order-1 lg:order-2">
-            {steps.map((step) => (
-              <div key={step.number} className="flex gap-5 group">
-                <div className="shrink-0">
-                  <div className="w-14 h-14 bg-secondary/10 rounded-2xl flex items-center justify-center group-hover:bg-secondary/20 transition-colors">
-                    <step.icon className="h-6 w-6 text-secondary" />
-                  </div>
-                </div>
-                <div>
-                  <span className="text-xs font-bold text-secondary tracking-widest uppercase">
-                    Step {step.number}
-                  </span>
-                  <h3 className="text-xl font-bold text-foreground mt-1 mb-2">
-                    {step.title}
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {step.description}
-                  </p>
-                </div>
+        <div className="grid md:grid-cols-3 gap-8 lg:gap-12 max-w-5xl mx-auto">
+          {steps.map((step) => (
+            <div key={step.number} className="text-center group">
+              <div className="w-16 h-16 bg-secondary/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-secondary/20 transition-colors">
+                <step.icon className="h-7 w-7 text-secondary" />
               </div>
-            ))}
-          </div>
+              <span className="text-xs font-bold text-secondary tracking-widest uppercase">
+                Step {step.number}
+              </span>
+              <h3 className="text-xl font-bold text-foreground mt-2 mb-3">
+                {step.title}
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                {step.description}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </section>

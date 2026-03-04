@@ -4,7 +4,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Shield, Clock, CheckCircle } from "lucide-react";
 import { toast } from "sonner";
-import leadFormImage from "@/assets/lead-form-side.jpg";
 
 const LeadCaptureForm = () => {
   const [formData, setFormData] = useState({
@@ -40,148 +39,127 @@ const LeadCaptureForm = () => {
   return (
     <section id="lead-form" className="py-20 lg:py-28 bg-background">
       <div className="container mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-6xl mx-auto">
-          {/* Side Image */}
-          <div className="hidden lg:block relative rounded-2xl overflow-hidden shadow-xl">
-            <img
-              src={leadFormImage}
-              alt="Family enjoying their home porch"
-              className="w-full h-[600px] object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-8">
-              <p className="text-primary-foreground text-xl font-bold leading-snug">
-                "Best investment we've made for our home."
-              </p>
-              <p className="text-primary-foreground/80 text-sm mt-2">
-                — Dave R., Massachusetts
-              </p>
+        <div className="max-w-2xl mx-auto">
+          <div className="text-center mb-10">
+            <div className="w-14 h-14 bg-secondary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <Shield className="h-7 w-7 text-secondary" />
             </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
+              Get Your Free Quote
+            </h2>
+            <p className="text-muted-foreground text-lg">
+              Don't wait until something breaks. Lock in protection today.
+            </p>
           </div>
 
-          {/* Form */}
-          <div>
-            <div className="text-center lg:text-left mb-10">
-              <div className="w-14 h-14 bg-secondary/10 rounded-2xl flex items-center justify-center mx-auto lg:mx-0 mb-4">
-                <Shield className="h-7 w-7 text-secondary" />
+          <form
+            onSubmit={handleSubmit}
+            className="bg-card rounded-2xl p-8 md:p-10 border border-border shadow-lg"
+          >
+            {/* Hidden UTM & tracking fields */}
+            <input type="hidden" name="utm_source" id="utm_source" />
+            <input type="hidden" name="utm_medium" id="utm_medium" />
+            <input type="hidden" name="utm_campaign" id="utm_campaign" />
+            <input type="hidden" name="utm_content" id="utm_content" />
+            <input type="hidden" name="lead_type" value="Campaign" />
+            <input type="hidden" name="page_url" id="page_url" />
+
+            <div className="grid md:grid-cols-2 gap-5">
+              <div>
+                <Label htmlFor="firstName" className="text-foreground font-medium">First Name</Label>
+                <Input
+                  id="firstName"
+                  placeholder="John"
+                  value={formData.firstName}
+                  onChange={(e) => handleChange("firstName", e.target.value)}
+                  required
+                  className="mt-1.5 h-12"
+                />
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
-                Get Your Free Quote
-              </h2>
-              <p className="text-muted-foreground text-lg">
-                Don't wait until something breaks. Lock in protection today.
-              </p>
+              <div>
+                <Label htmlFor="lastName" className="text-foreground font-medium">Last Name</Label>
+                <Input
+                  id="lastName"
+                  placeholder="Smith"
+                  value={formData.lastName}
+                  onChange={(e) => handleChange("lastName", e.target.value)}
+                  required
+                  className="mt-1.5 h-12"
+                />
+              </div>
             </div>
 
-            <form
-              onSubmit={handleSubmit}
-              className="bg-card rounded-2xl p-8 md:p-10 border border-border shadow-lg"
+            <div className="mt-5">
+              <Label htmlFor="streetAddress" className="text-foreground font-medium">Street Address</Label>
+              <Input
+                id="streetAddress"
+                placeholder="123 Main St"
+                value={formData.streetAddress}
+                onChange={(e) => handleChange("streetAddress", e.target.value)}
+                required
+                className="mt-1.5 h-12"
+              />
+            </div>
+
+            <div className="mt-5">
+              <Label htmlFor="zipCode" className="text-foreground font-medium">ZIP Code</Label>
+              <Input
+                id="zipCode"
+                placeholder="06001"
+                value={formData.zipCode}
+                onChange={(e) => handleChange("zipCode", e.target.value)}
+                required
+                className="mt-1.5 h-12"
+              />
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-5 mt-5">
+              <div>
+                <Label htmlFor="phone" className="text-foreground font-medium">Phone Number</Label>
+                <Input
+                  id="phone"
+                  type="tel"
+                  placeholder="(555) 123-4567"
+                  value={formData.phone}
+                  onChange={(e) => handleChange("phone", e.target.value)}
+                  required
+                  className="mt-1.5 h-12"
+                />
+              </div>
+              <div>
+                <Label htmlFor="email" className="text-foreground font-medium">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="john@example.com"
+                  value={formData.email}
+                  onChange={(e) => handleChange("email", e.target.value)}
+                  required
+                  className="mt-1.5 h-12"
+                />
+              </div>
+            </div>
+
+            <Button
+              type="submit"
+              variant="cta"
+              className="w-full h-14 text-lg rounded-lg mt-8"
             >
-              {/* Hidden UTM & tracking fields */}
-              <input type="hidden" name="utm_source" id="utm_source" />
-              <input type="hidden" name="utm_medium" id="utm_medium" />
-              <input type="hidden" name="utm_campaign" id="utm_campaign" />
-              <input type="hidden" name="utm_content" id="utm_content" />
-              <input type="hidden" name="lead_type" value="Campaign" />
-              <input type="hidden" name="page_url" id="page_url" />
+              Protect My Home — Get a Free Quote
+            </Button>
 
-              <div className="grid md:grid-cols-2 gap-5">
-                <div>
-                  <Label htmlFor="firstName" className="text-foreground font-medium">First Name</Label>
-                  <Input
-                    id="firstName"
-                    placeholder="John"
-                    value={formData.firstName}
-                    onChange={(e) => handleChange("firstName", e.target.value)}
-                    required
-                    className="mt-1.5 h-12"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="lastName" className="text-foreground font-medium">Last Name</Label>
-                  <Input
-                    id="lastName"
-                    placeholder="Smith"
-                    value={formData.lastName}
-                    onChange={(e) => handleChange("lastName", e.target.value)}
-                    required
-                    className="mt-1.5 h-12"
-                  />
-                </div>
-              </div>
-
-              <div className="mt-5">
-                <Label htmlFor="streetAddress" className="text-foreground font-medium">Street Address</Label>
-                <Input
-                  id="streetAddress"
-                  placeholder="123 Main St"
-                  value={formData.streetAddress}
-                  onChange={(e) => handleChange("streetAddress", e.target.value)}
-                  required
-                  className="mt-1.5 h-12"
-                />
-              </div>
-
-              <div className="mt-5">
-                <Label htmlFor="zipCode" className="text-foreground font-medium">ZIP Code</Label>
-                <Input
-                  id="zipCode"
-                  placeholder="06001"
-                  value={formData.zipCode}
-                  onChange={(e) => handleChange("zipCode", e.target.value)}
-                  required
-                  className="mt-1.5 h-12"
-                />
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-5 mt-5">
-                <div>
-                  <Label htmlFor="phone" className="text-foreground font-medium">Phone Number</Label>
-                  <Input
-                    id="phone"
-                    type="tel"
-                    placeholder="(555) 123-4567"
-                    value={formData.phone}
-                    onChange={(e) => handleChange("phone", e.target.value)}
-                    required
-                    className="mt-1.5 h-12"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="email" className="text-foreground font-medium">Email</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="john@example.com"
-                    value={formData.email}
-                    onChange={(e) => handleChange("email", e.target.value)}
-                    required
-                    className="mt-1.5 h-12"
-                  />
-                </div>
-              </div>
-
-              <Button
-                type="submit"
-                variant="cta"
-                className="w-full h-14 text-lg rounded-lg mt-8"
-              >
-                Protect My Home — Get a Free Quote
-              </Button>
-
-              <div className="flex flex-wrap items-center justify-center gap-4 mt-5 text-sm text-muted-foreground">
-                <span className="flex items-center gap-1.5">
-                  <CheckCircle className="h-4 w-4 text-secondary" /> No commitment
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <CheckCircle className="h-4 w-4 text-secondary" /> No inspection
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Clock className="h-4 w-4 text-secondary" /> Takes less than 60 seconds
-                </span>
-              </div>
-            </form>
-          </div>
+            <div className="flex flex-wrap items-center justify-center gap-4 mt-5 text-sm text-muted-foreground">
+              <span className="flex items-center gap-1.5">
+                <CheckCircle className="h-4 w-4 text-secondary" /> No commitment
+              </span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle className="h-4 w-4 text-secondary" /> No inspection
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Clock className="h-4 w-4 text-secondary" /> Takes less than 60 seconds
+              </span>
+            </div>
+          </form>
         </div>
       </div>
     </section>

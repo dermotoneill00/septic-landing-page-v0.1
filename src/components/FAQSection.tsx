@@ -4,7 +4,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import faqImage from "@/assets/faq-side.jpg";
 
 const faqs = [
   {
@@ -46,38 +45,22 @@ const FAQSection = () => {
           </h2>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-12 max-w-6xl mx-auto">
-          {/* FAQ Accordion */}
-          <div className="lg:col-span-3">
-            <Accordion type="single" collapsible className="space-y-3">
-              {faqs.map((faq, index) => (
-                <AccordionItem
-                  key={index}
-                  value={`item-${index}`}
-                  className="bg-background rounded-xl border border-border px-6 data-[state=open]:shadow-sm"
-                >
-                  <AccordionTrigger className="text-left font-semibold text-foreground hover:no-underline py-5">
-                    {faq.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground leading-relaxed pb-5">
-                    {faq.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </div>
-
-          {/* Side Image */}
-          <div className="hidden lg:block lg:col-span-2">
-            <div className="sticky top-24 rounded-2xl overflow-hidden shadow-xl">
-              <img
-                src={faqImage}
-                alt="Homeowner reviewing coverage paperwork"
-                className="w-full h-[480px] object-cover"
-              />
-            </div>
-          </div>
-        </div>
+        <Accordion type="single" collapsible className="space-y-3 max-w-3xl mx-auto">
+          {faqs.map((faq, index) => (
+            <AccordionItem
+              key={index}
+              value={`item-${index}`}
+              className="bg-background rounded-xl border border-border px-6 data-[state=open]:shadow-sm"
+            >
+              <AccordionTrigger className="text-left font-semibold text-foreground hover:no-underline py-5">
+                {faq.question}
+              </AccordionTrigger>
+              <AccordionContent className="text-muted-foreground leading-relaxed pb-5">
+                {faq.answer}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
       </div>
     </section>
   );
