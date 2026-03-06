@@ -105,6 +105,7 @@ export default function HeroEnrollCard() {
   const handleComplete = async () => {
     setIsSubmitting(true);
     await saveLead(data, "submitted");
+    await supabase.functions.invoke("invite-user", { body: { email: data.email } });
     setIsSubmitting(false);
     navigate("/enroll/success", { state: { data } });
   };

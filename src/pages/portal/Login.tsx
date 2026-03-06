@@ -147,7 +147,7 @@ export default function Login() {
           </Card>
 
           <p className="text-center text-xs text-muted-foreground mt-6">
-            Portal access is available to active policyholders only.
+            New customer? Check your email for an invite link — no password needed.
           </p>
         </div>
       </div>

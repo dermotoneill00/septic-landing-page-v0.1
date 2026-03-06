@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logoWhite from "@/assets/logo-white.png";
 import { EnrollmentData } from "@/types/enrollment";
@@ -26,10 +26,20 @@ export default function EnrollSuccess() {
           </p>
         )}
 
-        <p className="text-white/60 text-sm leading-relaxed mb-8">
-          You'll receive a confirmation email shortly with your policy details and coverage
-          start date. If you have any questions, our team is here to help.
+        <p className="text-white/60 text-sm leading-relaxed mb-6">
+          Your ProGuard coverage is active. We've sent a confirmation email with your policy details.
         </p>
+
+        {/* Portal access callout */}
+        <div className="bg-[#F5C842]/15 border border-[#F5C842]/40 rounded-2xl px-5 py-4 mb-6 text-left flex items-start gap-3">
+          <Mail className="w-5 h-5 text-[#F5C842] flex-shrink-0 mt-0.5" />
+          <div>
+            <p className="text-[#F5C842] font-semibold text-sm mb-0.5">Check your email for portal access</p>
+            <p className="text-white/60 text-xs leading-relaxed">
+              We've sent {data?.email ? <span className="text-white/80">{data.email}</span> : "your email"} an invite link to your Customer Portal — where you can view your policy, coverage details, and contact support.
+            </p>
+          </div>
+        </div>
 
         {/* Coverage summary */}
         <div className="bg-white/10 border border-white/20 rounded-2xl p-6 mb-8 text-left space-y-3">
@@ -46,12 +56,21 @@ export default function EnrollSuccess() {
           ))}
         </div>
 
-        <Button
-          onClick={() => navigate("/")}
-          className="bg-[#F5C842] hover:bg-[#e6b93a] text-gray-900 font-bold px-8 h-12 rounded-xl"
-        >
-          Back to Home
-        </Button>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <Button
+            onClick={() => navigate("/portal")}
+            className="bg-[#F5C842] hover:bg-[#e6b93a] text-gray-900 font-bold px-8 h-12 rounded-xl"
+          >
+            Go to My Portal
+          </Button>
+          <Button
+            onClick={() => navigate("/")}
+            variant="outline"
+            className="border-white/30 text-white/70 bg-transparent hover:bg-white/10 font-medium px-8 h-12 rounded-xl"
+          >
+            Back to Home
+          </Button>
+        </div>
       </div>
     </div>
   );
