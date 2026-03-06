@@ -22,3 +22,16 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment files — never commit secrets
+.env
+.env.local
+.env.*.local
+.env.production
+
+# Import outputs — contain credentials, never commit
+imports/output/temp-passwords-export.csv
+imports/output/flagged-rows.csv
+
+# CSV source files — keep raw customer data out of version control
+imports/input/
