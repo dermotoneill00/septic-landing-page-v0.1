@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { EnrollmentData } from "@/types/enrollment";
 import { cn } from "@/lib/utils";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import traditionalImg from "@/assets/system-traditional.jpg";
 import atuImg from "@/assets/system-atu.jpg";
 import sandMoundImg from "@/assets/system-sandmound.jpg";
@@ -27,6 +29,11 @@ const SYSTEM_TYPES = [
 ];
 
 export default function StepSystemType({ data, onChange }: Props) {
+  const [activeIdx, setActiveIdx] = useState(0);
+
+  const prev = () => setActiveIdx((i) => (i - 1 + DIAGRAMS.length) % DIAGRAMS.length);
+  const next = () => setActiveIdx((i) => (i + 1) % DIAGRAMS.length);
+
   return (
     <div className="space-y-5">
       <div className="text-center">
@@ -38,18 +45,47 @@ export default function StepSystemType({ data, onChange }: Props) {
         </p>
       </div>
 
-      {/* System type images */}
-      <div className="flex gap-2">
-        {DIAGRAMS.map((d) => (
-          <div key={d.label} className="flex-1 rounded-lg overflow-hidden border border-white/20">
-            <img
-              src={d.src}
-              alt={d.label}
-              className="w-full h-20 object-cover"
+      {/* Image carousel */}
+      <div className="relative rounded-xl overflow-hidden border border-white/20">
+        <img
+          src={DIAGRAMS[activeIdx].src}
+          alt={DIAGRAMS[activeIdx].label}
+          className="w-full h-44 object-cover transition-all duration-300"
+        />
+        {/* Label overlay */}
+        <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/70 to-transparent px-4 py-3">
+          <p className="text-white font-semibold text-sm">{DIAGRAMS[activeIdx].label}</p>
+        </div>
+        {/* Prev arrow */}
+        <button
+          onClick={prev}
+          className="absolute left-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/40 hover:bg-black/60 flex items-center justify-center transition-colors"
+          aria-label="Previous"
+        >
+          <ChevronLeft className="w-4 h-4 text-white" />
+        </button>
+        {/* Next arrow */}
+        <button
+          onClick={next}
+          className="absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/40 hover:bg-black/60 flex items-center justify-center transition-colors"
+          aria-label="Next"
+        >
+          <ChevronRight className="w-4 h-4 text-white" />
+        </button>
+        {/* Dot indicators */}
+        <div className="absolute top-2 right-2 flex gap-1">
+          {DIAGRAMS.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setActiveIdx(i)}
+              className={cn(
+                "w-2 h-2 rounded-full transition-all",
+                i === activeIdx ? "bg-[#F5C842]" : "bg-white/40 hover:bg-white/70"
+              )}
+              aria-label={DIAGRAMS[i].label}
             />
-            <p className="text-white/70 text-xs text-center py-1.5 bg-white/5">{d.label}</p>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       {/* Selection */}
