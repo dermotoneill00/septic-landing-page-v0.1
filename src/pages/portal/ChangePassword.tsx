@@ -142,13 +142,3 @@ export default function ChangePassword() {
     </PortalLayout>
   );
 }
- >
-                {isSubmitting ? "Saving..." : "Save Password and Continue"}
-              </Button>
-            </form>
-          </CardContent>
-        </Card>
-      </div>
-    </PortalLayout>
-  );
-}
