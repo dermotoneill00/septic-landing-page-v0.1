@@ -26,10 +26,11 @@ interface Props {
 }
 
 export default function StepPlan({ data, onChange, onProceed }: Props) {
-  const [promoInput, setPromoInput] = useState(data.promoCode || "");
+  const [promoInput, setPromoInput] = useState(data?.promoCode || "");
   const [promoError, setPromoError] = useState("");
 
-  const applied = data.promoCode ? PROMO_CODES[data.promoCode] ?? null : null;
+  const applied = data?.promoCode ? PROMO_CODES[data.promoCode] ?? null : null;
+  const finalPrice = data?.finalPrice ?? 499;
 
   const handleApply = () => {
     const code = promoInput.trim().toUpperCase();
@@ -74,7 +75,7 @@ export default function StepPlan({ data, onChange, onProceed }: Props) {
               <p className="text-white/50 text-xs line-through">${BASE_PRICE}/yr</p>
             )}
             <p className="text-[#F5C842] font-bold text-lg leading-none">
-              ${data.finalPrice.toFixed(applied ? 2 : 0)}
+              ${finalPrice.toFixed(applied ? 2 : 0)}
               <span className="text-xs font-normal text-white/60">/yr</span>
             </p>
           </div>
@@ -133,7 +134,7 @@ export default function StepPlan({ data, onChange, onProceed }: Props) {
                   <p className="text-gray-400 text-xs line-through">${BASE_PRICE}.00</p>
                 )}
                 <p className="text-3xl font-bold text-gray-900">
-                  ${data.finalPrice.toFixed(applied ? 2 : 0)}
+                  ${finalPrice.toFixed(applied ? 2 : 0)}
                   <span className="text-gray-400 text-sm font-normal ml-1">/year</span>
                 </p>
               </div>
