@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { AlertCircle, ArrowLeft } from "lucide-react";
+import { AlertCircle, ArrowLeft, CheckCircle2 } from "lucide-react";
 import logoDarkGreen from "@/assets/logo-dark-green.png";
 
 const loginSchema = z.object({
@@ -21,6 +21,8 @@ type LoginFormValues = z.infer<typeof loginSchema>;
 
 export default function Login() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const passwordUpdated = (location.state as { passwordUpdated?: boolean } | null)?.passwordUpdated ?? false;
   const [authError, setAuthError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -74,6 +76,13 @@ export default function Login() {
               </CardDescription>
             </CardHeader>
             <CardContent>
+              {passwordUpdated && (
+                <Alert className="mb-6 border-green-200 bg-green-50 text-green-800">
+                  <CheckCircle2 className="h-4 w-4 text-green-600" />
+                  <AlertDescription>Your password has been updated. Please sign in with your new password.</AlertDescription>
+                </Alert>
+              )}
+
               {authError && (
                 <Alert variant="destructive" className="mb-6">
                   <AlertCircle className="h-4 w-4" />

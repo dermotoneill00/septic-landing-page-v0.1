@@ -34,7 +34,7 @@ create table if not exists policies (
   id                      uuid        primary key default gen_random_uuid(),
   profile_id              uuid        references profiles(id) on delete cascade,
   source_record_id        text,
-  policy_number           text        not null,
+  policy_number           text        not null unique,
   status                  text        not null,
   product_type            text,
   product                 text,

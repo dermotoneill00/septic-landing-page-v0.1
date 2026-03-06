@@ -1,13 +1,20 @@
 import { createClient } from "@supabase/supabase-js";
 import type { Database } from "@/types/database";
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string;
+const supabaseUrl = (import.meta.env.VITE_SUPABASE_URL as string) || "";
+const supabaseAnonKey = (import.meta.env.VITE_SUPABASE_ANON_KEY as string) || "";
 
 if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error(
-    "Missing Supabase environment variables. Copy .env.example to .env.local and fill in your project values."
+  console.warn(
+    "[ProGuard] Supabase environment variables are not set. " +
+      "Copy .env.example to .env.local and add your project URL and anon key. " +
+      "Portal authentication will not work until this is configured."
   );
 }
 
-export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey);
+// createClient accepts placeholder strings safely; actual API calls will fail
+// with a network error until real credentials are provided.
+export const supabase = createClient<Database>(
+  supabaseUrl || "https://placeholder.supabase.co",
+  supabaseAnonKey || "placeholder-anon-key"
+);

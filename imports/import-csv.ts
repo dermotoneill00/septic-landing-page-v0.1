@@ -218,24 +218,34 @@ if (isDryRun) {
   process.exit(0);
 }
 
-// ── Step 4 + 5: Create auth users, profiles, and policy rows ─────────────────
+// ── Step 4: Load all existing auth users once (paginated) ────────────────────
+
+const authUserMap = new Map<string, string>(); // email → auth user id
+let page = 1;
+while (true) {
+  const { data: pageData } = await supabase.auth.admin.listUsers({ page, perPage: 1000 });
+  if (!pageData?.users?.length) break;
+  for (const u of pageData.users) {
+    if (u.email) authUserMap.set(normalizeEmail(u.email), u.id);
+  }
+  if (pageData.users.length < 1000) break;
+  page++;
+}
+console.log(`Loaded ${authUserMap.size} existing auth users.\n`);
+
+// ── Step 5: Create auth users, profiles, and policy rows ─────────────────────
 
 const result: ImportResult = { created: 0, skipped: 0, flagged: flaggedRows.length, errors: [] };
 const tempPasswords: { email: string; temp_password: string; first_name: string; last_name: string }[] = [];
 
 for (const group of eligible) {
   const tempPassword = generateTempPassword();
-
-  // Check if auth user already exists
-  const { data: existingUsers } = await supabase.auth.admin.listUsers();
-  const existingUser = existingUsers?.users?.find(
-    (u) => normalizeEmail(u.email) === group.email
-  );
+  const existingAuthUserId = authUserMap.get(group.email);
 
   let authUserId: string;
 
-  if (existingUser) {
-    authUserId = existingUser.id;
+  if (existingAuthUserId) {
+    authUserId = existingAuthUserId;
     console.log(`  [SKIP] Auth user already exists: ${group.email}`);
     result.skipped++;
   } else {
@@ -254,6 +264,7 @@ for (const group of eligible) {
     }
 
     authUserId = authData.user.id;
+    authUserMap.set(group.email, authUserId);
     tempPasswords.push({
       email: group.email,
       temp_password: tempPassword,

@@ -1,3 +1,4 @@
+import { Suspense, lazy } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -12,9 +13,12 @@ import EnrollSuccess from "./pages/EnrollSuccess";
 import LPTrust from "./pages/LPTrust";
 import LPFear from "./pages/LPFear";
 import NotFound from "./pages/NotFound";
-import Login from "./pages/portal/Login";
-import Dashboard from "./pages/portal/Dashboard";
-import ChangePassword from "./pages/portal/ChangePassword";
+
+// Portal pages loaded lazily so Vite transforms them on first navigation,
+// not at app boot — avoids module-not-ready race on initial page load.
+const Login = lazy(() => import("./pages/portal/Login"));
+const Dashboard = lazy(() => import("./pages/portal/Dashboard"));
+const ChangePassword = lazy(() => import("./pages/portal/ChangePassword"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,38 +36,46 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <AuthProvider>
-          <Routes>
-            {/* ── Marketing / landing pages ── */}
-            <Route path="/" element={<Index />} />
-            <Route path="/enroll" element={<Enroll />} />
-            <Route path="/enroll/denied" element={<EnrollDenied />} />
-            <Route path="/enroll/success" element={<EnrollSuccess />} />
-            <Route path="/lp/trust" element={<LPTrust />} />
-            <Route path="/lp/fear" element={<LPFear />} />
+          <Suspense
+            fallback={
+              <div className="min-h-screen bg-background flex items-center justify-center">
+                <div className="h-8 w-8 rounded-full border-2 border-primary border-t-transparent animate-spin" />
+              </div>
+            }
+          >
+            <Routes>
+              {/* ── Marketing / landing pages ── */}
+              <Route path="/" element={<Index />} />
+              <Route path="/enroll" element={<Enroll />} />
+              <Route path="/enroll/denied" element={<EnrollDenied />} />
+              <Route path="/enroll/success" element={<EnrollSuccess />} />
+              <Route path="/lp/trust" element={<LPTrust />} />
+              <Route path="/lp/fear" element={<LPFear />} />
 
-            {/* ── Customer portal ── */}
-            <Route path="/portal" element={<Navigate to="/portal/login" replace />} />
-            <Route path="/portal/login" element={<Login />} />
-            <Route
-              path="/portal/dashboard"
-              element={
-                <ProtectedRoute>
-                  <Dashboard />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/portal/change-password"
-              element={
-                <ProtectedRoute>
-                  <ChangePassword />
-                </ProtectedRoute>
-              }
-            />
+              {/* ── Customer portal ── */}
+              <Route path="/portal" element={<Navigate to="/portal/login" replace />} />
+              <Route path="/portal/login" element={<Login />} />
+              <Route
+                path="/portal/dashboard"
+                element={
+                  <ProtectedRoute>
+                    <Dashboard />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/portal/change-password"
+                element={
+                  <ProtectedRoute>
+                    <ChangePassword />
+                  </ProtectedRoute>
+                }
+              />
 
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
         </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>

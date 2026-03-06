@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
@@ -30,8 +31,9 @@ const schema = z
 type FormValues = z.infer<typeof schema>;
 
 export default function ChangePassword() {
-  const { user } = useAuth();
+  const { user, signOut } = useAuth();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -54,21 +56,15 @@ export default function ChangePassword() {
     }
 
     if (user) {
-      const { data: profile } = await supabase
+      await supabase
         .from("profiles")
-        .select("id")
-        .eq("auth_user_id", user.id)
-        .single();
-
-      if (profile) {
-        await supabase
-          .from("profiles")
-          .update({ must_reset_password: false })
-          .eq("id", profile.id);
-      }
+        .update({ must_reset_password: false })
+        .eq("auth_user_id", user.id);
     }
 
-    navigate("/portal/dashboard");
+    queryClient.clear();
+    await signOut();
+    navigate("/portal/login", { state: { passwordUpdated: true } });
   };
 
   return (
@@ -137,6 +133,16 @@ export default function ChangePassword() {
                 className="w-full rounded-lg"
                 disabled={isSubmitting}
               >
+                {isSubmitting ? "Saving..." : "Save Password and Continue"}
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
+      </div>
+    </PortalLayout>
+  );
+}
+ >
                 {isSubmitting ? "Saving..." : "Save Password and Continue"}
               </Button>
             </form>
