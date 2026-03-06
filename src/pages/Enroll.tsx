@@ -4,14 +4,16 @@ import { ChevronLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logoWhite from "@/assets/logo-white.png";
 import { EnrollmentData, defaultEnrollmentData, COVERED_STATES } from "@/types/enrollment";
+import { supabase } from "@/lib/supabase";
 import StepPersonal from "@/components/enroll/StepPersonal";
 import StepAddress from "@/components/enroll/StepAddress";
 import StepSystemAge from "@/components/enroll/StepSystemAge";
 import StepSystemType from "@/components/enroll/StepSystemType";
 import StepMaintenance from "@/components/enroll/StepMaintenance";
 import StepPlan from "@/components/enroll/StepPlan";
+import StepPayment from "@/components/enroll/StepPayment";
 
-const TOTAL_STEPS = 6;
+const TOTAL_STEPS = 7;
 
 function canProceed(step: number, data: EnrollmentData): boolean {
   switch (step) {
@@ -24,12 +26,38 @@ function canProceed(step: number, data: EnrollmentData): boolean {
   }
 }
 
+async function saveLead(data: EnrollmentData, status = "submitted") {
+  await supabase.from("leads").insert({
+    first_name: data.firstName,
+    last_name: data.lastName,
+    email: data.email,
+    phone: data.phone,
+    street: data.street,
+    city: data.city,
+    state: data.state,
+    zip: data.zip,
+    installed_past_year: data.installedPastYear,
+    system_type: data.systemType,
+    maintains_system: data.maintainsSystem,
+    maintenance_frequency: data.maintenanceFrequency,
+    bedrooms: data.bedrooms,
+    occupants: data.occupants,
+    promo_code: data.promoCode || null,
+    final_price: data.finalPrice,
+    utm_source: data.utm_source || null,
+    utm_medium: data.utm_medium || null,
+    utm_campaign: data.utm_campaign || null,
+    utm_content: data.utm_content || null,
+    status,
+  });
+}
+
 export default function Enroll() {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [data, setData] = useState<EnrollmentData>(defaultEnrollmentData);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Capture UTM params on mount
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     setData((d) => ({
@@ -46,13 +74,13 @@ export default function Enroll() {
   };
 
   const handleNext = () => {
-    // Step 2: state eligibility check
     if (step === 2 && !COVERED_STATES.includes(data.state)) {
+      saveLead(data, "denied_state");
       navigate("/enroll/denied?reason=state");
       return;
     }
-    // Step 4: cesspool denial
     if (step === 4 && data.systemType === "cesspool") {
+      saveLead(data, "denied_cesspool");
       navigate("/enroll/denied?reason=cesspool");
       return;
     }
@@ -72,7 +100,14 @@ export default function Enroll() {
   };
 
   const handleProceed = () => {
-    // POC: skip Stripe, go straight to success
+    setStep(7);
+    window.scrollTo(0, 0);
+  };
+
+  const handleComplete = async () => {
+    setIsSubmitting(true);
+    await saveLead(data, "submitted");
+    setIsSubmitting(false);
     navigate("/enroll/success", { state: { data } });
   };
 
@@ -109,11 +144,12 @@ export default function Enroll() {
         {step === 3 && <StepSystemAge data={data} onChange={handleChange} />}
         {step === 4 && <StepSystemType data={data} onChange={handleChange} />}
         {step === 5 && <StepMaintenance data={data} onChange={handleChange} />}
-        {step === 6 && <StepPlan onProceed={handleProceed} />}
+        {step === 6 && <StepPlan data={data} onChange={handleChange} onProceed={handleProceed} />}
+        {step === 7 && <StepPayment data={data} onComplete={handleComplete} isSubmitting={isSubmitting} />}
       </main>
 
       {/* Navigation */}
-      {step < TOTAL_STEPS && (
+      {step < 6 && (
         <footer className="px-4 pb-10 pt-4 max-w-2xl mx-auto w-full">
           <div className="flex items-center justify-between">
             <Button
@@ -135,7 +171,7 @@ export default function Enroll() {
         </footer>
       )}
 
-      {step === TOTAL_STEPS && (
+      {step >= 6 && (
         <footer className="px-4 pb-10 pt-4 max-w-2xl mx-auto w-full">
           <Button
             variant="outline"

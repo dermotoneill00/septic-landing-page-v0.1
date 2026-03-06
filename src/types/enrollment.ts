@@ -23,6 +23,10 @@ export interface EnrollmentData {
   bedrooms: string;
   occupants: string;
 
+  // Plan / Promo
+  promoCode: string;
+  finalPrice: number;
+
   // UTM
   utm_source: string;
   utm_medium: string;
@@ -66,5 +70,6 @@ export const defaultEnrollmentData: EnrollmentData = {
   installedPastYear: "",
   systemType: "",
   maintainsSystem: "", maintenanceFrequency: "", bedrooms: "", occupants: "",
+  promoCode: "", finalPrice: 499,
   utm_source: "", utm_medium: "", utm_campaign: "", utm_content: "",
 };

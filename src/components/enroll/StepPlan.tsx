@@ -2,8 +2,8 @@ import { useState } from "react";
 import { CheckCircle2, Tag, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { EnrollmentData } from "@/types/enrollment";
 
-// Demo promo codes (POC)
 const PROMO_CODES: Record<string, { label: string; discount: number }> = {
   WELCOME10: { label: "10% welcome discount", discount: 49.9 },
   SAVE50:    { label: "$50 off your first year", discount: 50 },
@@ -20,20 +20,21 @@ const FEATURES = [
 ];
 
 interface Props {
+  data: EnrollmentData;
+  onChange: (fields: Partial<EnrollmentData>) => void;
   onProceed: () => void;
 }
 
-export default function StepPlan({ onProceed }: Props) {
-  const [promoInput, setPromoInput] = useState("");
-  const [applied, setApplied] = useState<{ code: string; label: string; discount: number } | null>(null);
+export default function StepPlan({ data, onChange, onProceed }: Props) {
+  const [promoInput, setPromoInput] = useState(data.promoCode || "");
   const [promoError, setPromoError] = useState("");
 
-  const finalPrice = applied ? BASE_PRICE - applied.discount : BASE_PRICE;
+  const applied = data.promoCode ? PROMO_CODES[data.promoCode] ?? null : null;
 
   const handleApply = () => {
     const code = promoInput.trim().toUpperCase();
     if (PROMO_CODES[code]) {
-      setApplied({ code, ...PROMO_CODES[code] });
+      onChange({ promoCode: code, finalPrice: BASE_PRICE - PROMO_CODES[code].discount });
       setPromoError("");
     } else {
       setPromoError("Invalid promo code. Please try again.");
@@ -41,7 +42,7 @@ export default function StepPlan({ onProceed }: Props) {
   };
 
   const handleRemovePromo = () => {
-    setApplied(null);
+    onChange({ promoCode: "", finalPrice: BASE_PRICE });
     setPromoInput("");
     setPromoError("");
   };
@@ -73,12 +74,13 @@ export default function StepPlan({ onProceed }: Props) {
               <p className="text-white/50 text-xs line-through">${BASE_PRICE}/yr</p>
             )}
             <p className="text-[#F5C842] font-bold text-lg leading-none">
-              ${finalPrice.toFixed(applied ? 2 : 0)}<span className="text-xs font-normal text-white/60">/yr</span>
+              ${data.finalPrice.toFixed(applied ? 2 : 0)}
+              <span className="text-xs font-normal text-white/60">/yr</span>
             </p>
           </div>
         </div>
 
-        {/* Features */}
+        {/* Features + promo */}
         <div className="bg-white px-5 py-4 space-y-2.5">
           {FEATURES.map((item) => (
             <div key={item} className="flex items-center gap-2.5">
@@ -88,13 +90,12 @@ export default function StepPlan({ onProceed }: Props) {
           ))}
 
           <div className="border-t border-gray-100 pt-3 mt-1">
-            {/* Applied promo banner */}
             {applied ? (
               <div className="flex items-center justify-between bg-green-50 border border-green-200 rounded-lg px-3 py-2 mb-3">
                 <div className="flex items-center gap-2">
                   <Tag className="w-3.5 h-3.5 text-green-600 flex-shrink-0" />
                   <div>
-                    <p className="text-green-700 text-xs font-semibold">{applied.code} applied</p>
+                    <p className="text-green-700 text-xs font-semibold">{data.promoCode} applied</p>
                     <p className="text-green-600 text-xs">{applied.label}</p>
                   </div>
                 </div>
@@ -103,7 +104,6 @@ export default function StepPlan({ onProceed }: Props) {
                 </button>
               </div>
             ) : (
-              /* Promo code input */
               <div className="space-y-1.5 mb-3">
                 <p className="text-gray-500 text-xs font-medium">Have a promo code?</p>
                 <div className="flex gap-2">
@@ -126,7 +126,6 @@ export default function StepPlan({ onProceed }: Props) {
               </div>
             )}
 
-            {/* Price summary */}
             <div className="flex items-end justify-between">
               <p className="text-gray-400 text-xs">Total due today</p>
               <div className="text-right">
@@ -134,7 +133,7 @@ export default function StepPlan({ onProceed }: Props) {
                   <p className="text-gray-400 text-xs line-through">${BASE_PRICE}.00</p>
                 )}
                 <p className="text-3xl font-bold text-gray-900">
-                  ${finalPrice.toFixed(applied ? 2 : 0)}
+                  ${data.finalPrice.toFixed(applied ? 2 : 0)}
                   <span className="text-gray-400 text-sm font-normal ml-1">/year</span>
                 </p>
               </div>
@@ -143,16 +142,12 @@ export default function StepPlan({ onProceed }: Props) {
         </div>
       </div>
 
-      {/* CTA */}
       <Button
         onClick={onProceed}
-        className="w-full h-13 bg-[#F5C842] hover:bg-[#e6b93a] text-gray-900 font-bold text-base rounded-xl"
+        className="w-full h-12 bg-[#F5C842] hover:bg-[#e6b93a] text-gray-900 font-bold text-base rounded-xl"
       >
-        Review &amp; Pay
+        Continue to Payment →
       </Button>
-      <p className="text-center text-white/30 text-xs">
-        Stripe payment integration — coming soon (POC mode)
-      </p>
     </div>
   );
 }

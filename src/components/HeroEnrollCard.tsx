@@ -3,14 +3,16 @@ import { useNavigate } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { EnrollmentData, defaultEnrollmentData, COVERED_STATES } from "@/types/enrollment";
+import { supabase } from "@/lib/supabase";
 import StepPersonal from "@/components/enroll/StepPersonal";
 import StepAddress from "@/components/enroll/StepAddress";
 import StepSystemAge from "@/components/enroll/StepSystemAge";
 import StepSystemType from "@/components/enroll/StepSystemType";
 import StepMaintenance from "@/components/enroll/StepMaintenance";
 import StepPlan from "@/components/enroll/StepPlan";
+import StepPayment from "@/components/enroll/StepPayment";
 
-const TOTAL_STEPS = 6;
+const TOTAL_STEPS = 7;
 
 const STEP_LABELS = [
   "Your Details",
@@ -19,6 +21,7 @@ const STEP_LABELS = [
   "System Type",
   "Maintenance",
   "Select Plan",
+  "Payment",
 ];
 
 function canProceed(step: number, data: EnrollmentData): boolean {
@@ -32,10 +35,37 @@ function canProceed(step: number, data: EnrollmentData): boolean {
   }
 }
 
+async function saveLead(data: EnrollmentData, status = "submitted") {
+  await supabase.from("leads").insert({
+    first_name: data.firstName,
+    last_name: data.lastName,
+    email: data.email,
+    phone: data.phone,
+    street: data.street,
+    city: data.city,
+    state: data.state,
+    zip: data.zip,
+    installed_past_year: data.installedPastYear,
+    system_type: data.systemType,
+    maintains_system: data.maintainsSystem,
+    maintenance_frequency: data.maintenanceFrequency,
+    bedrooms: data.bedrooms,
+    occupants: data.occupants,
+    promo_code: data.promoCode || null,
+    final_price: data.finalPrice,
+    utm_source: data.utm_source || null,
+    utm_medium: data.utm_medium || null,
+    utm_campaign: data.utm_campaign || null,
+    utm_content: data.utm_content || null,
+    status,
+  });
+}
+
 export default function HeroEnrollCard() {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [data, setData] = useState<EnrollmentData>(defaultEnrollmentData);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -54,10 +84,12 @@ export default function HeroEnrollCard() {
 
   const handleNext = () => {
     if (step === 2 && !COVERED_STATES.includes(data.state)) {
+      saveLead(data, "denied_state");
       navigate("/enroll/denied?reason=state");
       return;
     }
     if (step === 4 && data.systemType === "cesspool") {
+      saveLead(data, "denied_cesspool");
       navigate("/enroll/denied?reason=cesspool");
       return;
     }
@@ -68,7 +100,12 @@ export default function HeroEnrollCard() {
     if (step > 1) setStep((s) => s - 1);
   };
 
-  const handleProceed = () => {
+  const handleProceed = () => setStep(7);
+
+  const handleComplete = async () => {
+    setIsSubmitting(true);
+    await saveLead(data, "submitted");
+    setIsSubmitting(false);
     navigate("/enroll/success", { state: { data } });
   };
 
@@ -88,7 +125,6 @@ export default function HeroEnrollCard() {
           <span className="text-white/70 font-medium text-sm">{STEP_LABELS[step - 1]}</span>
           <span className="text-white/40 text-xs">Step {step} of {TOTAL_STEPS}</span>
         </div>
-        {/* Progress bar */}
         <div className="flex gap-1">
           {Array.from({ length: TOTAL_STEPS }).map((_, i) => (
             <div
@@ -108,11 +144,12 @@ export default function HeroEnrollCard() {
         {step === 3 && <StepSystemAge data={data} onChange={handleChange} />}
         {step === 4 && <StepSystemType data={data} onChange={handleChange} />}
         {step === 5 && <StepMaintenance data={data} onChange={handleChange} />}
-        {step === 6 && <StepPlan onProceed={handleProceed} />}
+        {step === 6 && <StepPlan data={data} onChange={handleChange} onProceed={handleProceed} />}
+        {step === 7 && <StepPayment data={data} onComplete={handleComplete} isSubmitting={isSubmitting} />}
       </div>
 
-      {/* Navigation */}
-      {step < TOTAL_STEPS && (
+      {/* Navigation — steps 1–5 only */}
+      {step < 6 && (
         <div className="px-5 pb-5 pt-3 flex items-center justify-between border-t border-white/10">
           <Button
             variant="ghost"
@@ -134,7 +171,8 @@ export default function HeroEnrollCard() {
         </div>
       )}
 
-      {step === TOTAL_STEPS && (
+      {/* Back only for steps 6–7 */}
+      {step >= 6 && (
         <div className="px-5 pb-5 pt-3 border-t border-white/10">
           <Button
             variant="ghost"
