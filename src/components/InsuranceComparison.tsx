@@ -93,17 +93,17 @@ const InsuranceComparison = () => {
             <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground pt-2 pl-2">
               Feature
             </div>
-            <div className="text-center bg-secondary/10 rounded-t-xl pt-3 pb-2 border border-b-0 border-secondary/30">
+            <div className="text-center bg-green-50 rounded-t-xl pt-3 pb-2 border border-b-0 border-green-200">
               <span className="text-sm font-bold uppercase tracking-wider text-secondary">
                 ProGuard
               </span>
             </div>
-            <div className="text-center pt-3 pb-2">
+            <div className="text-center bg-red-50 rounded-t-xl pt-3 pb-2 border border-b-0 border-red-100">
               <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                 Homeowners Ins.
               </span>
             </div>
-            <div className="text-center pt-3 pb-2">
+            <div className="text-center bg-red-50 rounded-t-xl pt-3 pb-2 border border-b-0 border-red-100">
               <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                 Other Warranties
               </span>
@@ -124,15 +124,15 @@ const InsuranceComparison = () => {
                   </span>
                 </div>
                 {/* ProGuard */}
-                <div className="bg-secondary/8 border-l-2 border-secondary/40 font-medium text-foreground">
+                <div className="bg-green-50 border-l-2 border-green-300 font-medium text-foreground">
                   <Cell status={row.proguard.status} text={row.proguard.text} />
                 </div>
                 {/* Homeowners */}
-                <div className="bg-muted/20 text-muted-foreground">
+                <div className="bg-red-50/60 text-muted-foreground">
                   <Cell status={row.homeowners.status} text={row.homeowners.text} />
                 </div>
                 {/* Competitors */}
-                <div className="bg-muted/20 text-muted-foreground">
+                <div className="bg-red-50/60 text-muted-foreground">
                   <Cell status={row.competitors.status} text={row.competitors.text} />
                 </div>
               </div>
