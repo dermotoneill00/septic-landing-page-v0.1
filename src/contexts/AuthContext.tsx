@@ -5,11 +5,16 @@ import { supabase } from "@/lib/supabase";
 interface AuthContextValue {
   session: Session | null;
   user: User | null;
+  isAdmin: boolean;
   loading: boolean;
   signOut: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
+
+function getIsAdmin(session: Session | null): boolean {
+  return session?.user?.app_metadata?.role === "admin";
+}
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
@@ -35,7 +40,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ session, user: session?.user ?? null, loading, signOut }}>
+    <AuthContext.Provider
+      value={{
+        session,
+        user: session?.user ?? null,
+        isAdmin: getIsAdmin(session),
+        loading,
+        signOut,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
