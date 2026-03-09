@@ -71,14 +71,17 @@ export default function HeroEnrollCard({ variant }: { variant?: "yellow" }) {
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
+    // If no utm_content in URL, auto-tag the yellow card variant so A/B data
+    // flows through to the leads table without requiring manual UTM params.
+    const utmContent = params.get("utm_content") || (variant === "yellow" ? "ab-yellow-card" : "");
     setData((d) => ({
       ...d,
       utm_source: params.get("utm_source") || "",
       utm_medium: params.get("utm_medium") || "",
       utm_campaign: params.get("utm_campaign") || "",
-      utm_content: params.get("utm_content") || "",
+      utm_content: utmContent,
     }));
-  }, []);
+  }, [variant]);
 
   const handleChange = (fields: Partial<EnrollmentData>) => {
     setData((d) => ({ ...d, ...fields }));
