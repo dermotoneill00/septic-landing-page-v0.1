@@ -1,6 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
-  <!-- Shield shape -->
-  <path d="M16 2L4 7v9c0 7.18 5.16 13.9 12 15.93C22.84 29.9 28 23.18 28 16V7L16 2Z" fill="#1B5E3B"/>
-  <!-- Check mark -->
-  <path d="M11 16.5l3.5 3.5 6.5-7" stroke="#F5F0E8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- ProGuard brand mark — dark green flat-top hexagon with white icon -->
+  <!-- Flat-top hexagon background -->
+  <path d="M9 3 L23 3 L31 16 L23 29 L9 29 L1 16 Z" fill="#1B5E3B"/>
+
+  <!-- White icon: dual-riser septic tank symbol (two access ports + drain) -->
+  <!-- Left riser -->
+  <rect x="10.5" y="8.5" width="4" height="8.5" rx="0.5" fill="white"/>
+  <!-- Right riser -->
+  <rect x="17.5" y="8.5" width="4" height="8.5" rx="0.5" fill="white"/>
+  <!-- Tank body / connecting bar -->
+  <rect x="10.5" y="17" width="11" height="2.5" rx="0.5" fill="white"/>
+  <!-- Downward drain chevron -->
+  <path d="M13.5 19.5 L16 24.5 L18.5 19.5 Z" fill="white"/>
 </svg>
