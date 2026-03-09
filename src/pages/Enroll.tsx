@@ -44,6 +44,7 @@ async function saveLead(data: EnrollmentData, status = "submitted") {
     occupants: data.occupants,
     promo_code: data.promoCode || null,
     final_price: data.finalPrice,
+    referral_code: data.referralCode || null,
     utm_source: data.utm_source || null,
     utm_medium: data.utm_medium || null,
     utm_campaign: data.utm_campaign || null,
@@ -62,6 +63,7 @@ export default function Enroll() {
     const params = new URLSearchParams(window.location.search);
     setData((d) => ({
       ...d,
+      referralCode: params.get("ref") || "",
       utm_source: params.get("utm_source") || "",
       utm_medium: params.get("utm_medium") || "",
       utm_campaign: params.get("utm_campaign") || "",
@@ -121,8 +123,17 @@ export default function Enroll() {
         <img src={logoWhite} alt="ProGuard Plans" className="h-10" />
       </header>
 
+      {/* Referral banner */}
+      {data.referralCode && (
+        <div className="px-4 max-w-2xl mx-auto w-full">
+          <div className="bg-white/10 border border-white/20 rounded-lg px-4 py-2.5 text-white/90 text-sm text-center">
+            You were referred by a ProGuard member — welcome!
+          </div>
+        </div>
+      )}
+
       {/* Progress bar */}
-      <div className="px-4 pb-2 max-w-2xl mx-auto w-full">
+      <div className="px-4 pb-2 max-w-2xl mx-auto w-full mt-2">
         <div className="flex gap-1.5">
           {Array.from({ length: TOTAL_STEPS }).map((_, i) => (
             <div

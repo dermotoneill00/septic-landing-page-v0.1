@@ -17,6 +17,7 @@ export interface Database {
           first_name: string | null;
           last_name: string | null;
           phone: string | null;
+          referral_code: string;
           portal_enabled: boolean;
           must_reset_password: boolean;
           created_at: string;
@@ -51,6 +52,22 @@ export interface Database {
         };
         Insert: Omit<Database["public"]["Tables"]["policies"]["Row"], "id" | "created_at" | "updated_at">;
         Update: Partial<Database["public"]["Tables"]["policies"]["Insert"]>;
+      };
+      referrals: {
+        Row: {
+          id: string;
+          referrer_profile_id: string;
+          referee_email: string;
+          referee_profile_id: string | null;
+          referral_code: string;
+          status: string;
+          reward_amount: number;
+          created_at: string;
+          enrolled_at: string | null;
+          rewarded_at: string | null;
+        };
+        Insert: Omit<Database["public"]["Tables"]["referrals"]["Row"], "id" | "created_at">;
+        Update: Partial<Database["public"]["Tables"]["referrals"]["Insert"]>;
       };
       import_review_flags: {
         Row: {

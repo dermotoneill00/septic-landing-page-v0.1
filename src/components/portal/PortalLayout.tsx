@@ -21,7 +21,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: "Service History", href: "/portal/history",    icon: ClipboardList },
   { label: "Documents",       href: "/portal/documents",  icon: FileText },
   { label: "Account",         href: "/portal/account",    icon: Settings },
-  { label: "Referrals",       href: "/portal/referrals",  icon: GitBranch, badge: "Soon" },
+  { label: "Referrals",       href: "/portal/referrals",  icon: GitBranch },
   { label: "Admin",           href: "/portal/admin",      icon: ShieldCheck, adminOnly: true },
 ];
 

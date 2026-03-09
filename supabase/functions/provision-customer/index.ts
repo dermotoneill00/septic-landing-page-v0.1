@@ -91,7 +91,7 @@ Deno.serve(async (req) => {
   // a fresh profiles row.
   const { data: lead, error: leadError } = await supabaseAdmin
     .from("leads")
-    .select("first_name, last_name, phone")
+    .select("first_name, last_name, phone, referral_code")
     .eq("email", email)
     .eq("status", "submitted")
     .maybeSingle();
@@ -113,7 +113,7 @@ Deno.serve(async (req) => {
     });
   }
 
-  const { error: insertError } = await supabaseAdmin
+  const { data: newProfile, error: insertError } = await supabaseAdmin
     .from("profiles")
     .insert({
       auth_user_id: authUserId,
@@ -123,7 +123,9 @@ Deno.serve(async (req) => {
       phone: lead.phone ?? null,
       portal_enabled: true,
       must_reset_password: false,
-    });
+    })
+    .select("id")
+    .single();
 
   if (insertError) {
     console.error("Profile insert error:", insertError.message);
@@ -131,6 +133,39 @@ Deno.serve(async (req) => {
       status: 500,
       headers: { "Content-Type": "application/json" },
     });
+  }
+
+  // ── Referral tracking ───────────────────────────────────────────────────
+  // If the lead was referred (has a referral_code from ?ref= param), create
+  // a referral record linking the referrer to this new customer.
+  if (lead.referral_code && newProfile) {
+    const { data: referrer } = await supabaseAdmin
+      .from("profiles")
+      .select("id")
+      .eq("referral_code", lead.referral_code)
+      .maybeSingle();
+
+    if (referrer) {
+      const { error: refError } = await supabaseAdmin
+        .from("referrals")
+        .insert({
+          referrer_profile_id: referrer.id,
+          referee_email: email,
+          referee_profile_id: newProfile.id,
+          referral_code: lead.referral_code,
+          status: "enrolled",
+          reward_amount: 20.0,
+          enrolled_at: new Date().toISOString(),
+        });
+      if (refError) {
+        // Log but don't fail the provisioning — referral is non-critical
+        console.error("Referral insert error:", refError.message);
+      } else {
+        console.log(`Referral recorded: ${lead.referral_code} → ${email}`);
+      }
+    } else {
+      console.log(`Referral code ${lead.referral_code} not found — skipping`);
+    }
   }
 
   console.log(`Created new profile for ${email}`);

@@ -27,6 +27,9 @@ export interface EnrollmentData {
   promoCode: string;
   finalPrice: number;
 
+  // Referral
+  referralCode: string;
+
   // UTM
   utm_source: string;
   utm_medium: string;
@@ -71,5 +74,6 @@ export const defaultEnrollmentData: EnrollmentData = {
   systemType: "",
   maintainsSystem: "", maintenanceFrequency: "", bedrooms: "", occupants: "",
   promoCode: "", finalPrice: 499,
+  referralCode: "",
   utm_source: "", utm_medium: "", utm_campaign: "", utm_content: "",
 };
