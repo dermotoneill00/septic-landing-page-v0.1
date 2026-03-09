@@ -20,6 +20,8 @@ const Login = lazy(() => import("./pages/portal/Login"));
 const Dashboard = lazy(() => import("./pages/portal/Dashboard"));
 const ChangePassword = lazy(() => import("./pages/portal/ChangePassword"));
 const Referrals = lazy(() => import("./pages/portal/Referrals"));
+const Claim = lazy(() => import("./pages/portal/Claim"));
+const Documents = lazy(() => import("./pages/portal/Documents"));
 const Admin = lazy(() => import("./pages/portal/Admin"));
 
 const queryClient = new QueryClient({
@@ -70,6 +72,22 @@ const App = () => (
                 element={
                   <ProtectedRoute>
                     <ChangePassword />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/portal/claim"
+                element={
+                  <ProtectedRoute>
+                    <Claim />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/portal/documents"
+                element={
+                  <ProtectedRoute>
+                    <Documents />
                   </ProtectedRoute>
                 }
               />

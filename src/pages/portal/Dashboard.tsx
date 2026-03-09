@@ -17,9 +17,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { User, MapPin, Phone, Mail, AlertCircle, FileDown } from "lucide-react";
+import { User, MapPin, Phone, Mail, AlertCircle, FileDown, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { jsPDF } from "jspdf";
+
+// TODO: Replace with your real Google Business review link
+// Find yours at: https://business.google.com → Get more reviews → copy the link
+const GOOGLE_REVIEW_URL = "https://g.page/r/YOUR_GOOGLE_PLACE_ID/review";
 
 function statusVariant(status: string): "default" | "secondary" | "destructive" | "outline" {
   switch (status.toLowerCase()) {
@@ -477,6 +481,40 @@ export default function Dashboard() {
 
           {policies && policies.length > 0 && (
             <PolicyHistoryTable policies={policies} />
+          )}
+
+          {/* Google Review card — only shown when customer has an active policy */}
+          {activePolicies.length > 0 && (
+            <Card className="border-amber-200 bg-amber-50 mt-8">
+              <CardContent className="py-5">
+                <div className="flex flex-col sm:flex-row items-center gap-4">
+                  <div className="flex-shrink-0 flex gap-0.5">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="h-5 w-5 fill-amber-400 text-amber-400" />
+                    ))}
+                  </div>
+                  <div className="flex-1 text-center sm:text-left">
+                    <p className="text-sm font-semibold text-foreground">
+                      Happy with your ProGuard coverage?
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-0.5">
+                      A quick review helps your neighbours find reliable septic protection.
+                    </p>
+                  </div>
+                  <Button
+                    asChild
+                    size="sm"
+                    variant="outline"
+                    className="border-amber-400 text-amber-800 hover:bg-amber-100 flex-shrink-0 gap-2"
+                  >
+                    <a href={GOOGLE_REVIEW_URL} target="_blank" rel="noopener noreferrer">
+                      <Star className="h-3.5 w-3.5 fill-amber-500 text-amber-500" />
+                      Leave a Google Review
+                    </a>
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
           )}
 
           <div className="mt-10 pt-8 border-t border-border text-center">

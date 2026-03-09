@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
-import { LayoutDashboard, GitBranch, ShieldCheck, LogOut, Menu, X } from "lucide-react";
+import { LayoutDashboard, GitBranch, ShieldCheck, LogOut, Menu, X, Phone, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/contexts/AuthContext";
@@ -16,9 +16,11 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { label: "Overview",  href: "/portal/dashboard",  icon: LayoutDashboard },
-  { label: "Referrals", href: "/portal/referrals",   icon: GitBranch, badge: "Soon" },
-  { label: "Admin",     href: "/portal/admin",       icon: ShieldCheck, adminOnly: true },
+  { label: "Overview",      href: "/portal/dashboard",  icon: LayoutDashboard },
+  { label: "File a Claim",  href: "/portal/claim",      icon: Phone },
+  { label: "Documents",     href: "/portal/documents",  icon: FileText },
+  { label: "Referrals",     href: "/portal/referrals",  icon: GitBranch, badge: "Soon" },
+  { label: "Admin",         href: "/portal/admin",      icon: ShieldCheck, adminOnly: true },
 ];
 
 function SidebarNav({ isAdmin, onNavigate }: { isAdmin: boolean; onNavigate?: () => void }) {
@@ -102,21 +104,20 @@ export function PortalLayout({ children }: { children: React.ReactNode }) {
 
       <div className="flex flex-1 relative">
 
-        {/* ── Mobile overlay backdrop ────────────────────────────────────────── */}
+        {/* ── Overlay backdrop (all screen sizes) ───────────────────────────── */}
         {sidebarOpen && (
           <div
-            className="fixed inset-0 top-14 bg-black/40 z-30 lg:hidden"
+            className="fixed inset-0 top-14 bg-black/40 z-30"
             onClick={() => setSidebarOpen(false)}
           />
         )}
 
-        {/* ── Sidebar ───────────────────────────────────────────────────────── */}
+        {/* ── Sidebar (always a drawer — collapsed by default) ──────────────── */}
         <aside
           className={`
-            fixed top-14 left-0 bottom-0 w-56 bg-background border-r border-border z-30
+            fixed top-14 left-0 bottom-0 w-56 bg-background border-r border-border z-40
             transition-transform duration-200 ease-in-out
             ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
-            lg:translate-x-0 lg:sticky lg:top-14 lg:h-[calc(100vh-3.5rem)] lg:shrink-0
           `}
         >
           <SidebarNav isAdmin={isAdmin} onNavigate={() => setSidebarOpen(false)} />
