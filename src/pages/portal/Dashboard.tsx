@@ -17,7 +17,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { User, MapPin, Phone, Mail, AlertCircle } from "lucide-react";
+import { User, MapPin, Phone, Mail, AlertCircle, FileDown } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { jsPDF } from "jspdf";
 
 function statusVariant(status: string): "default" | "secondary" | "destructive" | "outline" {
   switch (status.toLowerCase()) {
@@ -52,6 +54,144 @@ function formatDate(dateStr: string | null): string {
   } catch {
     return dateStr;
   }
+}
+
+function downloadServiceAgreement(profile: Profile, policy: Policy) {
+  const doc = new jsPDF({ unit: "pt", format: "letter" });
+  const green = [27, 94, 59] as [number, number, number];
+  const gray = [100, 100, 100] as [number, number, number];
+  const black = [30, 30, 30] as [number, number, number];
+  const pageW = doc.internal.pageSize.getWidth();
+
+  // Header bar
+  doc.setFillColor(...green);
+  doc.rect(0, 0, pageW, 70, "F");
+  doc.setTextColor(255, 255, 255);
+  doc.setFontSize(22);
+  doc.setFont("helvetica", "bold");
+  doc.text("ProGuard Plans", 50, 38);
+  doc.setFontSize(11);
+  doc.setFont("helvetica", "normal");
+  doc.text("Septic System Service Agreement", 50, 56);
+
+  // Policy number badge
+  doc.setFontSize(10);
+  doc.text(`Policy #${policy.policy_number}`, pageW - 50, 44, { align: "right" });
+  doc.text(
+    `Effective: ${formatDate(policy.coverage_effective_date || policy.start_date)}`,
+    pageW - 50, 58, { align: "right" }
+  );
+
+  let y = 100;
+
+  // Section: Customer Info
+  const section = (title: string) => {
+    doc.setFillColor(245, 247, 245);
+    doc.rect(40, y - 14, pageW - 80, 20, "F");
+    doc.setTextColor(...green);
+    doc.setFontSize(10);
+    doc.setFont("helvetica", "bold");
+    doc.text(title.toUpperCase(), 50, y);
+    y += 20;
+    doc.setTextColor(...black);
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10);
+  };
+
+  const row = (label: string, value: string) => {
+    doc.setTextColor(...gray);
+    doc.setFont("helvetica", "bold");
+    doc.text(label, 50, y);
+    doc.setTextColor(...black);
+    doc.setFont("helvetica", "normal");
+    doc.text(value || "—", 200, y);
+    y += 18;
+  };
+
+  section("Policyholder");
+  row("Name:", [profile.first_name, profile.last_name].filter(Boolean).join(" ") || "—");
+  row("Email:", profile.email || "—");
+  row("Phone:", profile.phone || "—");
+  y += 10;
+
+  section("Covered Property");
+  const addr = policy.full_address ||
+    [policy.street, policy.city, policy.state, policy.zip].filter(Boolean).join(", ");
+  row("Address:", addr || "—");
+  row("Coverage Type:", policy.product_type || policy.product || "Septic System Protection");
+  row("Status:", policy.status || "—");
+  row("Effective Date:", formatDate(policy.coverage_effective_date || policy.start_date));
+  row("Renewal Date:", formatDate(policy.expiration_date));
+  y += 10;
+
+  section("What Your Plan Covers");
+  const coverageItems = [
+    "Septic pump failures & motor burnout",
+    "Tank structural failures",
+    "Drain field / leach field issues",
+    "Emergency pump-outs (up to 2 per year)",
+    "Distribution box failures",
+    "Baffle repairs & replacements",
+    "Inspection & diagnostic visits",
+  ];
+  coverageItems.forEach((item) => {
+    doc.setTextColor(...green);
+    doc.text("✓", 50, y);
+    doc.setTextColor(...black);
+    doc.text(item, 68, y);
+    y += 17;
+  });
+  y += 10;
+
+  section("What Is Not Covered");
+  const exclusions = [
+    "Damage caused by misuse or neglect",
+    "Cesspools or systems installed < 12 months ago",
+    "Pre-existing conditions known at time of enrollment",
+    "Cosmetic damage or landscaping restoration",
+  ];
+  exclusions.forEach((item) => {
+    doc.setTextColor(200, 50, 50);
+    doc.text("✕", 50, y);
+    doc.setTextColor(...black);
+    doc.text(item, 68, y);
+    y += 17;
+  });
+  y += 10;
+
+  section("How to File a Claim");
+  doc.setTextColor(...black);
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(10);
+  const claimText = [
+    "1. Call ProGuard Claims: 1-800-PRO-GUARD (available 24/7)",
+    "2. Provide your policy number and describe the issue",
+    "3. A licensed technician will be dispatched within 48 hours",
+    "4. ProGuard pays the service provider directly — $0 out of pocket",
+  ];
+  claimText.forEach((line) => {
+    doc.text(line, 50, y);
+    y += 17;
+  });
+  y += 10;
+
+  // Footer
+  doc.setDrawColor(220, 220, 220);
+  doc.line(40, y, pageW - 40, y);
+  y += 14;
+  doc.setTextColor(...gray);
+  doc.setFontSize(8);
+  doc.text(
+    "This document is for reference only. Your full service agreement terms are on file with ProGuard Plans.",
+    50, y
+  );
+  y += 12;
+  doc.text(
+    `Generated ${new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}  •  proguardplans.com`,
+    50, y
+  );
+
+  doc.save(`ProGuard-ServiceAgreement-${policy.policy_number}.pdf`);
 }
 
 function ProfileCard({ profile, activePolicies }: { profile: Profile; activePolicies: Policy[] }) {
@@ -115,6 +255,18 @@ function ProfileCard({ profile, activePolicies }: { profile: Profile; activePoli
                 </p>
               </div>
             )}
+
+            <div className="pt-2 border-t border-border">
+              <Button
+                variant="outline"
+                size="sm"
+                className="w-full gap-2 text-sm font-medium"
+                onClick={() => downloadServiceAgreement(profile, activePolicy)}
+              >
+                <FileDown className="h-4 w-4" />
+                Download Service Agreement
+              </Button>
+            </div>
           </CardContent>
         </Card>
       )}

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/contexts/AuthContext";
 import logoDarkGreen from "@/assets/logo-dark-green.png";
+import { ChatWidget } from "@/components/ChatWidget";
 
 interface NavItem {
   label: string;
@@ -126,6 +127,8 @@ export function PortalLayout({ children }: { children: React.ReactNode }) {
           {children}
         </main>
       </div>
+
+      <ChatWidget />
     </div>
   );
 }

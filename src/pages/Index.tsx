@@ -10,6 +10,7 @@ import InsuranceComparison from "@/components/InsuranceComparison";
 import FAQSection from "@/components/FAQSection";
 import Footer from "@/components/Footer";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
+import { ChatWidget } from "@/components/ChatWidget";
 
 const Index = () => {
   return (
@@ -28,6 +29,7 @@ const Index = () => {
       <StickyMobileCTA />
       {/* Bottom padding on mobile for sticky CTA */}
       <div className="h-16 md:hidden" />
+      <ChatWidget />
     </div>
   );
 };
