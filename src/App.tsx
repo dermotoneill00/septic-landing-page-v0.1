@@ -22,6 +22,8 @@ const ChangePassword = lazy(() => import("./pages/portal/ChangePassword"));
 const Referrals = lazy(() => import("./pages/portal/Referrals"));
 const Claim = lazy(() => import("./pages/portal/Claim"));
 const Documents = lazy(() => import("./pages/portal/Documents"));
+const History = lazy(() => import("./pages/portal/History"));
+const Account = lazy(() => import("./pages/portal/Account"));
 const Admin = lazy(() => import("./pages/portal/Admin"));
 
 const queryClient = new QueryClient({
@@ -88,6 +90,22 @@ const App = () => (
                 element={
                   <ProtectedRoute>
                     <Documents />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/portal/history"
+                element={
+                  <ProtectedRoute>
+                    <History />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/portal/account"
+                element={
+                  <ProtectedRoute>
+                    <Account />
                   </ProtectedRoute>
                 }
               />

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
-import { LayoutDashboard, GitBranch, ShieldCheck, LogOut, Menu, X, Phone, FileText } from "lucide-react";
+import { LayoutDashboard, GitBranch, ShieldCheck, LogOut, Menu, X, Phone, FileText, ClipboardList, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/contexts/AuthContext";
@@ -16,11 +16,13 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { label: "Overview",      href: "/portal/dashboard",  icon: LayoutDashboard },
-  { label: "File a Claim",  href: "/portal/claim",      icon: Phone },
-  { label: "Documents",     href: "/portal/documents",  icon: FileText },
-  { label: "Referrals",     href: "/portal/referrals",  icon: GitBranch, badge: "Soon" },
-  { label: "Admin",         href: "/portal/admin",      icon: ShieldCheck, adminOnly: true },
+  { label: "Overview",        href: "/portal/dashboard",  icon: LayoutDashboard },
+  { label: "File a Claim",    href: "/portal/claim",      icon: Phone },
+  { label: "Service History", href: "/portal/history",    icon: ClipboardList },
+  { label: "Documents",       href: "/portal/documents",  icon: FileText },
+  { label: "Account",         href: "/portal/account",    icon: Settings },
+  { label: "Referrals",       href: "/portal/referrals",  icon: GitBranch, badge: "Soon" },
+  { label: "Admin",           href: "/portal/admin",      icon: ShieldCheck, adminOnly: true },
 ];
 
 function SidebarNav({ isAdmin, onNavigate }: { isAdmin: boolean; onNavigate?: () => void }) {
