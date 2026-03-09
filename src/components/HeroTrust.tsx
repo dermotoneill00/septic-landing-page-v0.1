@@ -5,7 +5,7 @@ import heroImage from "@/assets/hero-home.jpg";
 import HeroEnrollCard from "@/components/HeroEnrollCard";
 
 const trustPoints = [
-  { icon: ShieldCheck, text: "25+ Years of Proven Protection" },
+  { icon: ShieldCheck, text: "27 Years of Proven Protection" },
   { icon: Star,        text: "91% of Customers Renew Every Year" },
   { icon: RefreshCw,   text: "Nationally Underwritten. Locally Serviced." },
 ];
@@ -25,17 +25,20 @@ const HeroTrust = () => {
 
           {/* Left: trust copy */}
           <div className="animate-fade-in-up">
-            <p className="text-accent font-semibold uppercase tracking-wider text-sm mb-4">
-              New England's Most Trusted Septic Plan
+            <p className="text-accent font-semibold uppercase tracking-widest text-sm mb-4">
+              America's Most Trusted Septic Plan
             </p>
             <h1 className="text-4xl md:text-5xl lg:text-5xl font-bold text-primary-foreground leading-tight mb-6">
-              25 Years Protecting Homeowners.{" "}
-              <span className="italic text-accent">One Less Thing to Worry About.</span>
+              27 Years Protecting Homeowners.
+              <span className="block italic text-accent text-5xl md:text-6xl lg:text-6xl leading-tight mt-2 drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">
+                One Less Thing to Worry About.
+              </span>
             </h1>
             <p className="text-lg md:text-xl text-primary-foreground/85 mb-8 leading-relaxed max-w-xl">
               ProGuard is underwritten by a nationally recognized carrier and renewed by 91% of
               our customers year after year — because when something breaks, we handle it.
-              Up to $25,000 in coverage. No inspection required.
+              <br className="hidden sm:block" />
+              <span className="font-semibold text-primary-foreground">Up to $25,000 in coverage. No inspection required.</span>
             </p>
 
             <div className="flex flex-col sm:flex-row gap-5 mb-8">
