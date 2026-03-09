@@ -51,7 +51,7 @@ const QUICK_REPLIES: QuickReply[] = [
       {
         label: "How do I enroll?",
         answer:
-          "Click "Get Protected" on the homepage and complete the 3-minute enrollment form. You'll receive a portal invite by email within minutes.",
+          'Click "Get Protected" on the homepage and complete the 3-minute enrollment form. You\'ll receive a portal invite by email within minutes.',
       },
     ],
   },
