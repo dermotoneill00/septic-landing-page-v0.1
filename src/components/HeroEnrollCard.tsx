@@ -61,11 +61,13 @@ async function saveLead(data: EnrollmentData, status = "submitted") {
   });
 }
 
-export default function HeroEnrollCard() {
+export default function HeroEnrollCard({ variant }: { variant?: "yellow" }) {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [data, setData] = useState<EnrollmentData>(defaultEnrollmentData);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const isYellow = variant === "yellow";
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -112,26 +114,42 @@ export default function HeroEnrollCard() {
 
   const ok = canProceed(step, data);
 
+  const cardBg    = isYellow ? "bg-[#F5C842]"     : "bg-gradient-to-b from-[#1B5E3B]/85 to-[#0d3320]/90";
+  const cardBorder = isYellow ? "border-black/10"  : "border-white/20";
+  const divider    = isYellow ? "border-black/10"  : "border-white/10";
+  const badgeText  = isYellow ? "text-[#1B5E3B]"   : "text-[#F5C842]";
+  const headingText = isYellow ? "text-gray-900"   : "text-white";
+  const labelText  = isYellow ? "text-gray-700"    : "text-white/70";
+  const counterText = isYellow ? "text-gray-500"   : "text-white/40";
+  const barActive  = isYellow ? "bg-[#1B5E3B]"     : "bg-[#F5C842]";
+  const barInactive = isYellow ? "bg-black/20"     : "bg-white/20";
+  const backClass  = isYellow
+    ? "text-gray-800 hover:text-gray-900 hover:bg-black/10 font-semibold disabled:opacity-0 px-3"
+    : "text-[#F5C842] hover:text-[#F5C842] hover:bg-[#F5C842]/10 font-semibold disabled:opacity-0 px-3";
+  const nextClass  = isYellow
+    ? "bg-[#1B5E3B] hover:bg-[#164d31] disabled:opacity-40 text-white font-semibold px-6 h-10 rounded-lg"
+    : "bg-gray-900 hover:bg-gray-800 disabled:opacity-40 text-white font-semibold px-6 h-10 rounded-lg";
+
   return (
-    <div className="rounded-2xl shadow-2xl overflow-hidden border border-white/20 backdrop-blur-md bg-gradient-to-b from-[#1B5E3B]/85 to-[#0d3320]/90">
+    <div className={`rounded-2xl shadow-2xl overflow-hidden border ${cardBorder} backdrop-blur-md ${cardBg}`}>
       {/* Card heading */}
-      <div className="px-5 pt-5 pb-3 border-b border-white/10">
-        <p className="text-[#F5C842] text-xs font-semibold uppercase tracking-widest mb-0.5">Free Quote. No Inspection Required.</p>
-        <h2 className="text-white text-lg font-bold leading-snug">Get covered in 2 minutes</h2>
+      <div className={`px-5 pt-5 pb-3 border-b ${divider}`}>
+        <p className={`${badgeText} text-xs font-semibold uppercase tracking-widest mb-0.5`}>Free Quote. No Inspection Required.</p>
+        <h2 className={`${headingText} text-lg font-bold leading-snug`}>Get covered in 2 minutes</h2>
       </div>
 
       {/* Progress header */}
       <div className="px-5 pt-3 pb-3">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-white/70 font-medium text-sm">{STEP_LABELS[step - 1]}</span>
-          <span className="text-white/40 text-xs">Step {step} of {TOTAL_STEPS}</span>
+          <span className={`${labelText} font-medium text-sm`}>{STEP_LABELS[step - 1]}</span>
+          <span className={`${counterText} text-xs`}>Step {step} of {TOTAL_STEPS}</span>
         </div>
         <div className="flex gap-1">
           {Array.from({ length: TOTAL_STEPS }).map((_, i) => (
             <div
               key={i}
               className={`h-1 flex-1 rounded-full transition-all duration-300 ${
-                i < step ? "bg-[#F5C842]" : "bg-white/20"
+                i < step ? barActive : barInactive
               }`}
             />
           ))}
@@ -151,12 +169,12 @@ export default function HeroEnrollCard() {
 
       {/* Navigation — steps 1–5 only */}
       {step < 6 && (
-        <div className="px-5 pb-5 pt-3 flex items-center justify-between border-t border-white/10">
+        <div className={`px-5 pb-5 pt-3 flex items-center justify-between border-t ${divider}`}>
           <Button
             variant="ghost"
             onClick={handleBack}
             disabled={step === 1}
-            className="text-[#F5C842] hover:text-[#F5C842] hover:bg-[#F5C842]/10 font-semibold disabled:opacity-0 px-3"
+            className={backClass}
           >
             <ChevronLeft className="w-4 h-4 mr-1" />
             Back
@@ -164,7 +182,7 @@ export default function HeroEnrollCard() {
           <Button
             onClick={handleNext}
             disabled={!ok}
-            className="bg-gray-900 hover:bg-gray-800 disabled:opacity-40 text-white font-semibold px-6 h-10 rounded-lg"
+            className={nextClass}
           >
             Next
             <ChevronRight className="w-4 h-4 ml-1" />
@@ -174,11 +192,11 @@ export default function HeroEnrollCard() {
 
       {/* Back only for steps 6–7 */}
       {step >= 6 && (
-        <div className="px-5 pb-5 pt-3 border-t border-white/10">
+        <div className={`px-5 pb-5 pt-3 border-t ${divider}`}>
           <Button
             variant="ghost"
             onClick={handleBack}
-            className="text-[#F5C842] hover:text-[#F5C842] hover:bg-[#F5C842]/10 font-semibold px-3"
+            className={backClass}
           >
             <ChevronLeft className="w-4 h-4 mr-1" />
             Back

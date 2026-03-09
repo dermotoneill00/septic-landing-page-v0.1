@@ -10,7 +10,7 @@ const trustPoints = [
   { icon: RefreshCw,   text: "Nationally Underwritten. Locally Serviced." },
 ];
 
-const HeroTrust = () => {
+const HeroTrust = ({ variant }: { variant?: "yellow" } = {}) => {
   const navigate = useNavigate();
 
   return (
@@ -67,7 +67,7 @@ const HeroTrust = () => {
 
           {/* Right: inline enrollment card */}
           <div className="animate-fade-in-up">
-            <HeroEnrollCard />
+            <HeroEnrollCard variant={variant} />
           </div>
 
         </div>

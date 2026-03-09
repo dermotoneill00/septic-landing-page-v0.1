@@ -11,6 +11,7 @@ import Enroll from "./pages/Enroll";
 import EnrollDenied from "./pages/EnrollDenied";
 import EnrollSuccess from "./pages/EnrollSuccess";
 import LPTrust from "./pages/LPTrust";
+import LPTrustB from "./pages/LPTrustB";
 import LPFear from "./pages/LPFear";
 import NotFound from "./pages/NotFound";
 
@@ -56,6 +57,7 @@ const App = () => (
               <Route path="/enroll/denied" element={<EnrollDenied />} />
               <Route path="/enroll/success" element={<EnrollSuccess />} />
               <Route path="/lp/trust" element={<LPTrust />} />
+              <Route path="/lp/trust-b" element={<LPTrustB />} />
               <Route path="/lp/fear" element={<LPFear />} />
 
               {/* ── Customer portal ── */}
