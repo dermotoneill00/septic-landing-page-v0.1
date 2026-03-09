@@ -45,7 +45,7 @@ export default function History() {
             <p className="text-sm text-muted-foreground mb-4">
               We&apos;re building a complete service history log so you can track every claim
               from submission through to repair completion, with technician details and
-              visit notes — all in one place.
+              visit notes, all in one place.
             </p>
             <p className="text-sm text-muted-foreground">
               In the meantime, need a record of a past claim? Call us at{" "}

@@ -36,7 +36,7 @@ const HeroTrust = () => {
             </h1>
             <p className="text-lg md:text-xl text-primary-foreground/85 mb-8 leading-relaxed max-w-xl">
               ProGuard is underwritten by a nationally recognized carrier and renewed by 91% of
-              our customers year after year — because when something breaks, we handle it.
+              our customers year after year, because when something breaks, we handle it.
               <br className="hidden sm:block" />
               <span className="font-semibold text-primary-foreground">Up to $25,000 in coverage. No inspection required.</span>
             </p>

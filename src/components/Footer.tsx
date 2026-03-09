@@ -4,6 +4,7 @@ import logoWhite from "@/assets/logo-white.png";
 const serviceStates = [
   "Connecticut", "Massachusetts", "New York", "New Jersey",
   "Pennsylvania", "Vermont", "New Hampshire", "Maine", "Rhode Island",
+  "Virginia", "Maryland", "Delaware",
 ];
 
 const Footer = () => {
@@ -23,10 +24,23 @@ const Footer = () => {
           {/* Contact */}
           <div>
             <h4 className="font-bold text-primary-foreground mb-4 text-base">Contact</h4>
-            {/* TODO: Replace with campaign-specific trackable phone number before launch */}
-            <div className="flex items-center gap-2 text-primary-foreground/80 mb-2">
-              <Phone className="h-4 w-4" />
-              <span>(888) 555-GUARD</span>
+            <div className="flex items-center gap-2 text-primary-foreground/80 mb-1">
+              <Phone className="h-4 w-4 shrink-0" />
+              <span className="text-sm">
+                Customer Service:{" "}
+                <a href="tel:8883540677" className="hover:text-primary-foreground transition-colors">
+                  (888) 354-0677
+                </a>
+              </span>
+            </div>
+            <div className="flex items-center gap-2 text-primary-foreground/80 mb-3">
+              <Phone className="h-4 w-4 shrink-0" />
+              <span className="text-sm">
+                Claims:{" "}
+                <a href="tel:8663568381" className="hover:text-primary-foreground transition-colors">
+                  (866) 356-8381
+                </a>
+              </span>
             </div>
             <p className="text-primary-foreground/60 text-sm">
               Mon–Fri 8am–6pm EST<br />

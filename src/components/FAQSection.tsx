@@ -8,11 +8,11 @@ import {
 const faqs = [
   {
     question: "How much does a ProGuard plan cost?",
-    answer: "Plans start at an affordable annual rate — a fraction of what a single repair would cost. Fill out the quote form above to get your personalized pricing in under 60 seconds.",
+    answer: "Plans start at an affordable annual rate, a fraction of what a single repair would cost. Fill out the quote form above to get your personalized pricing in under 60 seconds.",
   },
   {
     question: "What exactly is covered under the plan?",
-    answer: "ProGuard covers tank & distribution box repair/replacement, leach field repair & replacement, associated labor costs, emergency main line/wastewater pipe pump, new parts/pipes/components, and the plan is transferable to a new homeowner. We cover real-world breakdowns — not cosmetic issues, cesspools, or pre-existing damage you already know about.",
+    answer: "ProGuard covers tank & distribution box repair/replacement, leach field repair & replacement, associated labor costs, emergency main line/wastewater pipe pump, new parts/pipes/components, and the plan is transferable to a new homeowner. We cover real-world breakdowns, not cosmetic issues, cesspools, or pre-existing damage you already know about.",
   },
   {
     question: "How do I file a claim if something goes wrong?",
@@ -24,7 +24,7 @@ const faqs = [
   },
   {
     question: "What states do you serve?",
-    answer: "ProGuard currently serves homeowners across the Northeast United States, including Connecticut, Massachusetts, New York, New Jersey, Pennsylvania, Vermont, New Hampshire, Maine, and Rhode Island. We're expanding — check with us if your state isn't listed.",
+    answer: "ProGuard currently serves homeowners across the Northeast United States, including Connecticut, Massachusetts, New York, New Jersey, Pennsylvania, Vermont, New Hampshire, Maine, and Rhode Island. We're expanding, so check with us if your state isn't listed.",
   },
   {
     question: "Is there a waiting period before coverage kicks in?",

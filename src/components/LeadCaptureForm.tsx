@@ -145,7 +145,7 @@ const LeadCaptureForm = () => {
               variant="cta"
               className="w-full h-14 text-lg rounded-lg mt-8"
             >
-              Protect My Home — Get a Free Quote
+              Protect My Home. Get a Free Quote.
             </Button>
 
             <div className="flex flex-wrap items-center justify-center gap-4 mt-5 text-sm text-muted-foreground">

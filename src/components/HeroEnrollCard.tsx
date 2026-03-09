@@ -116,7 +116,7 @@ export default function HeroEnrollCard() {
     <div className="rounded-2xl shadow-2xl overflow-hidden border border-white/20 backdrop-blur-md bg-gradient-to-b from-[#1B5E3B]/85 to-[#0d3320]/90">
       {/* Card heading */}
       <div className="px-5 pt-5 pb-3 border-b border-white/10">
-        <p className="text-[#F5C842] text-xs font-semibold uppercase tracking-widest mb-0.5">Free Quote — No Inspection Required</p>
+        <p className="text-[#F5C842] text-xs font-semibold uppercase tracking-widest mb-0.5">Free Quote. No Inspection Required.</p>
         <h2 className="text-white text-lg font-bold leading-snug">Get covered in 2 minutes</h2>
       </div>
 

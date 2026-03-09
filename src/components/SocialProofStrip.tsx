@@ -2,7 +2,7 @@ import { Star } from "lucide-react";
 
 const testimonials = [
   {
-    quote: "Our septic pump failed on a holiday weekend. ProGuard had someone out the next morning — no charge.",
+    quote: "Our septic pump failed on a holiday weekend. ProGuard had someone out the next morning, no charge.",
     name: "Karen M.",
     state: "Connecticut",
     rating: 5,
@@ -59,7 +59,7 @@ const SocialProofStrip = () => {
                 "{t.quote}"
               </p>
               <p className="text-accent font-semibold text-sm">
-                {t.name} — {t.state}
+                {t.name}, {t.state}
               </p>
             </div>
           ))}

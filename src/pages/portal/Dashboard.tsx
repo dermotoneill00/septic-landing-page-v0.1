@@ -171,7 +171,7 @@ function downloadServiceAgreement(profile: Profile, policy: Policy) {
     "1. Call ProGuard Claims: 1-800-PRO-GUARD (available 24/7)",
     "2. Provide your policy number and describe the issue",
     "3. A licensed technician will be dispatched within 48 hours",
-    "4. ProGuard pays the service provider directly — $0 out of pocket",
+    "4. ProGuard pays the service provider directly. $0 out of pocket.",
   ];
   claimText.forEach((line) => {
     doc.text(line, 50, y);

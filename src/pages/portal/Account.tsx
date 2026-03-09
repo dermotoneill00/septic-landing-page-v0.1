@@ -182,7 +182,7 @@ export default function Account() {
                   {saveStatus === "error" && (
                     <span className="flex items-center gap-1.5 text-xs text-destructive font-medium">
                       <AlertCircle className="h-3.5 w-3.5" />
-                      Save failed — please try again
+                      Save failed. Please try again.
                     </span>
                   )}
                   {saveStatus === "idle" && <span />}

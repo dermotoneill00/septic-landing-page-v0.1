@@ -42,7 +42,7 @@ export default function StepPayment({ data, onComplete, isSubmitting }: Props) {
       <div className="flex items-center gap-2.5 bg-amber-400/15 border border-amber-400/40 rounded-xl px-4 py-2.5">
         <FlaskConical className="w-4 h-4 text-amber-400 flex-shrink-0" />
         <div>
-          <p className="text-amber-300 text-xs font-semibold">Test mode — no real charges</p>
+          <p className="text-amber-300 text-xs font-semibold">Test mode. No real charges.</p>
           <p className="text-amber-300/70 text-xs">Use card: 4242 4242 4242 4242 · Any future date · Any CVV</p>
         </div>
       </div>

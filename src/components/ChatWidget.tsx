@@ -27,26 +27,26 @@ const QUICK_REPLIES: QuickReply[] = [
       {
         label: "How do I file a claim?",
         answer:
-          "Call our claims line at 1-800-PRO-GUARD (available 24/7). Have your policy number ready. A licensed technician will be dispatched within 48 hours — we pay them directly so there's nothing out of pocket for you.",
+          "Call our claims line at 1-800-PRO-GUARD (available 24/7). Have your policy number ready. A licensed technician will be dispatched within 48 hours. We pay them directly so there's nothing out of pocket for you.",
       },
     ],
   },
   {
     label: "How do I file a claim?",
     answer:
-      "Call 1-800-PRO-GUARD anytime — we're available 24/7. Have your policy number handy. We dispatch a licensed technician within 48 hours and pay them directly. You pay nothing out of pocket.",
+      "Call 1-800-PRO-GUARD anytime. We're available 24/7. Have your policy number handy. We dispatch a licensed technician within 48 hours and pay them directly. You pay nothing out of pocket.",
     followUps: [
       {
         label: "What info do I need?",
         answer:
-          "Just your policy number and a description of the problem — we handle the rest. You'll find your policy number at the top of your portal dashboard.",
+          "Just your policy number and a description of the problem. We handle the rest. You'll find your policy number at the top of your portal dashboard.",
       },
     ],
   },
   {
     label: "How much does it cost?",
     answer:
-      "ProGuard is $499/year — less than the average cost of a single septic pump replacement ($600–$2,500). No deductibles, no surprise bills. One flat annual rate.",
+      "ProGuard is $499/year, less than the average cost of a single septic pump replacement ($600-$2,500). No deductibles, no surprise bills. One flat annual rate.",
     followUps: [
       {
         label: "How do I enroll?",
@@ -113,7 +113,7 @@ export function ChatWidget() {
     pushUser(text);
     setTimeout(() => {
       pushBot(
-        "Thanks for your message! Our support team will follow up via email within a few hours. For urgent issues, call 1-800-PRO-GUARD — we're available 24/7.",
+        "Thanks for your message! Our support team will follow up via email within a few hours. For urgent issues, call 1-800-PRO-GUARD. We're available 24/7.",
         QUICK_REPLIES
       );
     }, 500);

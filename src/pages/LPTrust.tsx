@@ -24,7 +24,7 @@ const LPTrust = () => {
       <HeroTrust />
 
       {/* Toggle button */}
-      <div className="flex justify-center py-6 bg-background">
+      <div className="flex justify-center py-3 bg-background">
         <button
           onClick={() => setExpanded((v) => !v)}
           className="flex items-center gap-2 text-sm font-semibold text-primary/70 hover:text-primary tracking-wide transition-colors duration-200"
@@ -38,7 +38,7 @@ const LPTrust = () => {
 
       {/* Collapsible content */}
       <div
-        className={`overflow-hidden transition-all duration-500 ease-in-out ${
+        className={`overflow-hidden transition-all duration-500 ease-in-out [&_section]:py-12 [&_section]:lg:py-16 ${
           expanded ? "max-h-[9999px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >

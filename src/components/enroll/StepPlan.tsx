@@ -7,7 +7,7 @@ import { EnrollmentData } from "@/types/enrollment";
 const PROMO_CODES: Record<string, { label: string; discount: number }> = {
   WELCOME10: { label: "10% welcome discount", discount: 49.9 },
   SAVE50:    { label: "$50 off your first year", discount: 50 },
-  NEIGHBOR:  { label: "Neighbor referral — $30 off", discount: 30 },
+  NEIGHBOR:  { label: "Neighbor referral: $30 off", discount: 30 },
 };
 
 const BASE_PRICE = 499;

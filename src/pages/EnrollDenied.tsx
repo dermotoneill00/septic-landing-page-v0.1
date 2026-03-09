@@ -21,14 +21,14 @@ export default function EnrollDenied() {
 
         <h1 className="text-3xl font-bold text-white mb-4">
           {isCesspool
-            ? "We're sorry — cesspools aren't covered"
+            ? "We're sorry, cesspools aren't covered"
             : "We don't currently serve your area"}
         </h1>
 
         <p className="text-white/70 leading-relaxed mb-8">
           {isCesspool
             ? "ProGuard Plans covers traditional, ATU, and sand mound septic systems. Unfortunately, cesspools and non-standard systems are not eligible for coverage at this time."
-            : "ProGuard Plans currently serves homeowners in MA, CT, NY, NJ, PA, DE, MD, VA, RI, NH, ME, and VT. We're working hard to expand — check back soon!"}
+            : "ProGuard Plans currently serves homeowners in MA, CT, NY, NJ, PA, DE, MD, VA, RI, NH, ME, and VT. We're working hard to expand. Check back soon!"}
         </p>
 
         <Button

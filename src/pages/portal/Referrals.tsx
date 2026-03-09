@@ -325,7 +325,7 @@ export default function Referrals() {
               <CardContent>
                 <ol className="space-y-2 text-sm text-muted-foreground list-decimal list-inside">
                   <li>Share your unique referral link with friends and neighbours</li>
-                  <li>They enroll through your link — it takes about 3 minutes</li>
+                  <li>They enroll through your link. It takes about 3 minutes.</li>
                   <li>You earn <span className="font-semibold text-foreground">${REWARD_PER_REFERRAL}</span> for each successful enrollment</li>
                   <li>Reach <span className="font-semibold text-foreground">{FREE_POLICY_THRESHOLD} referrals</span> and your next policy year is on us</li>
                 </ol>

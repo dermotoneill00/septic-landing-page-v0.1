@@ -127,7 +127,7 @@ export default function Enroll() {
       {data.referralCode && (
         <div className="px-4 max-w-2xl mx-auto w-full">
           <div className="bg-white/10 border border-white/20 rounded-lg px-4 py-2.5 text-white/90 text-sm text-center">
-            You were referred by a ProGuard member — welcome!
+            You were referred by a ProGuard member. Welcome!
           </div>
         </div>
       )}

@@ -41,7 +41,7 @@ export default function Claim() {
         <div className="mb-8">
           <h1 className="text-3xl font-display font-semibold text-foreground">File a Claim</h1>
           <p className="text-muted-foreground mt-1">
-            We&apos;re here 24/7 — get help fast with your septic system.
+            We&apos;re here 24/7. Get help fast with your septic system.
           </p>
         </div>
 
@@ -82,7 +82,7 @@ export default function Claim() {
               step={1}
               icon={Phone}
               title="Call our claims line"
-              body={`Dial ${CLAIMS_PHONE} any time of day or night. Have your policy number handy — you'll find it on your dashboard overview.`}
+              body={`Dial ${CLAIMS_PHONE} any time of day or night. Have your policy number handy. You'll find it on your dashboard overview.`}
             />
             <ClaimStepCard
               step={2}
@@ -100,7 +100,7 @@ export default function Claim() {
               step={4}
               icon={CreditCard}
               title="We pay the technician directly"
-              body="No out-of-pocket costs. ProGuard pays the service provider on your behalf — you never see a bill for covered repairs."
+              body="No out-of-pocket costs. ProGuard pays the service provider on your behalf. You never see a bill for covered repairs."
             />
           </CardContent>
         </Card>
@@ -154,7 +154,7 @@ export default function Claim() {
 
         {/* Online filing coming soon notice */}
         <p className="text-xs text-muted-foreground text-center mt-8">
-          Online claim submission is coming soon — for now, our claims team is standing by 24/7 by phone.
+          Online claim submission is coming soon. Our claims team is standing by 24/7 by phone.
         </p>
       </div>
     </PortalLayout>

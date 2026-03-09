@@ -6,7 +6,7 @@ const steps = [
     icon: FileText,
     number: "01",
     title: "Get a Quote in 60 Seconds",
-    description: "Fill out our simple form — no inspections, no hassle. We'll tailor a plan to your home.",
+    description: "Fill out our simple form. No inspections, no hassle. We'll tailor a plan to your home.",
   },
   {
     icon: Shield,

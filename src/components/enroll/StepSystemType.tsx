@@ -21,11 +21,11 @@ const DIAGRAMS = [
 const SYSTEM_TYPES = [
   {
     id: "eligible",
-    label: "Yes — my septic system is a 'Traditional', 'ATU' or 'Sand Mound'",
+    label: "Yes, my septic system is a 'Traditional', 'ATU' or 'Sand Mound'",
   },
   {
     id: "cesspool",
-    label: "No — my septic system is a cesspool or other non-standard system",
+    label: "No, my septic system is a cesspool or other non-standard system",
   },
 ];
 
@@ -44,7 +44,7 @@ export default function StepSystemType({ data, onChange }: Props) {
           What type of septic system do you have?
         </h1>
         <p className="text-white/60 text-xs max-w-lg mx-auto">
-          Don't know? No worries — click any image to enlarge.
+          Don't know? No worries. Click any image to enlarge.
         </p>
       </div>
 

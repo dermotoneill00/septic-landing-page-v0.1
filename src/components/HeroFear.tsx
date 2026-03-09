@@ -32,13 +32,13 @@ const HeroFear = () => {
 
             <h1 className="text-4xl md:text-5xl lg:text-5xl font-bold text-white leading-tight mb-6">
               Your Septic Will Fail.{" "}
-              <span className="italic text-[#F5C842]">The Question Is — Are You Covered?</span>
+              <span className="italic text-[#F5C842]">The Question Is: Are You Covered?</span>
             </h1>
 
             <p className="text-lg md:text-xl text-white/80 mb-8 leading-relaxed max-w-xl">
               Septic failures happen without warning and cost thousands. Homeowners insurance
               won't cover it. Generic warranties cap out fast. ProGuard pays up to{" "}
-              <span className="text-[#F5C842] font-semibold">$25,000</span> — so one bad day
+              <span className="text-[#F5C842] font-semibold">$25,000</span>, so one bad day
               doesn't become a financial disaster.
             </p>
 
@@ -59,7 +59,7 @@ const HeroFear = () => {
                 className="h-14 px-10 text-lg rounded-lg bg-red-600 hover:bg-red-700 text-white font-bold shadow-lg shadow-red-900/30"
                 onClick={() => navigate("/enroll")}
               >
-                Protect My Home Now — Before It's Too Late
+                Protect My Home Now, Before It's Too Late
               </Button>
             </div>
           </div>

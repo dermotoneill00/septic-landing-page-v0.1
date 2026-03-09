@@ -77,7 +77,7 @@ const CoverageHighlights = () => {
 
             <div className="mt-8 pt-6 border-t border-border">
               <p className="text-sm text-muted-foreground">
-                Questions about coverage? Call us — we're happy to walk you through everything.
+                Questions about coverage? Call us. We're happy to walk you through everything.
               </p>
             </div>
           </div>

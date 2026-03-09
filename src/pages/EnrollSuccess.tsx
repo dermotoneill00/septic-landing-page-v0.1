@@ -36,7 +36,7 @@ export default function EnrollSuccess() {
           <div>
             <p className="text-[#F5C842] font-semibold text-sm mb-0.5">Check your email for portal access</p>
             <p className="text-white/60 text-xs leading-relaxed">
-              We've sent {data?.email ? <span className="text-white/80">{data.email}</span> : "your email"} an invite link to your Customer Portal — where you can view your policy, coverage details, and contact support.
+              We've sent {data?.email ? <span className="text-white/80">{data.email}</span> : "your email"} an invite link to your Customer Portal, where you can view your policy, coverage details, and contact support.
             </p>
           </div>
         </div>

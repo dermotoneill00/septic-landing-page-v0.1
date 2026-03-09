@@ -147,7 +147,7 @@ export default function Login() {
           </Card>
 
           <p className="text-center text-xs text-muted-foreground mt-6">
-            New customer? Check your email for an invite link — no password needed.
+            New customer? Check your email for an invite link. No password needed.
           </p>
         </div>
       </div>

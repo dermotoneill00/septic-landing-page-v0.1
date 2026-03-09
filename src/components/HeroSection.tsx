@@ -38,7 +38,7 @@ const HeroSection = () => {
 
             <p className="text-lg md:text-xl text-primary-foreground/85 mb-8 leading-relaxed max-w-xl">
               ProGuard covers septic system repairs, replacement, and emergency
-              service — backed by 25+ years of trusted protection and underwritten
+              service, backed by 25+ years of trusted protection and underwritten
               by a nationally recognized carrier.
             </p>
 

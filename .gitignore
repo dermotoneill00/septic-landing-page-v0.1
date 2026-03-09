@@ -35,3 +35,4 @@ imports/output/flagged-rows.csv
 
 # CSV source files — keep raw customer data out of version control
 imports/input/
+.vercel
