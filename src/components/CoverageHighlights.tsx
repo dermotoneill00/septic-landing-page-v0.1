@@ -84,7 +84,7 @@ const CoverageHighlights = () => {
         </div>
 
         <div className="text-center mt-12">
-          <Button variant="cta" size="lg" className="h-14 px-10 text-lg rounded-lg" onClick={() => navigate("/enroll")}>
+          <Button variant="cta" size="lg" className="w-full sm:w-auto h-14 px-10 text-lg rounded-lg" onClick={() => navigate("/enroll")}>
             Protect My Home Today
           </Button>
         </div>

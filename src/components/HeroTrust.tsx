@@ -28,9 +28,9 @@ const HeroTrust = ({ variant }: { variant?: "yellow" } = {}) => {
             <p className="text-accent font-semibold uppercase tracking-widest text-sm mb-4">
               America's Most Trusted Septic Plan
             </p>
-            <h1 className="text-4xl md:text-5xl lg:text-5xl font-bold text-primary-foreground leading-tight mb-6">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-primary-foreground leading-tight mb-6">
               27 Years Protecting Homeowners.
-              <span className="block italic text-accent text-5xl md:text-6xl lg:text-6xl leading-tight mt-2 drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">
+              <span className="block italic text-accent text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight mt-2 drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">
                 One Less Thing to Worry About.
               </span>
             </h1>
@@ -52,21 +52,24 @@ const HeroTrust = ({ variant }: { variant?: "yellow" } = {}) => {
               ))}
             </div>
 
-            {/* Mobile CTA — hidden on lg where the card is visible */}
+            {/* CTA — shown on mobile/tablet; on lg the inline card is visible instead */}
             <div className="lg:hidden">
               <Button
                 variant="cta"
                 size="lg"
-                className="h-14 px-10 text-lg rounded-lg"
+                className="w-full sm:w-auto h-14 px-10 text-lg rounded-lg"
                 onClick={() => navigate("/enroll")}
               >
-                Get Covered Today
+                Get Covered Today — Free Quote
               </Button>
+              <p className="mt-3 text-primary-foreground/60 text-sm">
+                Takes 2 minutes · No inspection required
+              </p>
             </div>
           </div>
 
-          {/* Right: inline enrollment card */}
-          <div className="animate-fade-in-up">
+          {/* Right: inline enrollment card — desktop only */}
+          <div className="hidden lg:block animate-fade-in-up">
             <HeroEnrollCard variant={variant} />
           </div>
 

@@ -53,7 +53,7 @@ const LPTrustB = () => {
 
       <Footer />
       <StickyMobileCTA />
-      <div className="h-16 md:hidden" />
+      <div className="h-24 md:hidden" />
     </div>
   );
 };

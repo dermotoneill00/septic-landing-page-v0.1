@@ -32,7 +32,7 @@ const UrgencyCTA = () => {
         <Button
           variant="cta"
           size="lg"
-          className="h-14 px-10 text-lg rounded-lg"
+          className="w-full sm:w-auto h-14 px-10 text-lg rounded-lg"
           onClick={() => navigate("/enroll")}
         >
           Get Protected Now

@@ -44,11 +44,12 @@ const SocialProofStrip = () => {
         </div>
 
         {/* TODO: Replace with verified testimonials from proguardplans.com/testimonials/ */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Mobile: horizontal snap-scroll · md+: 2-col grid · lg+: 4-col grid */}
+        <div className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory -mx-4 px-4 md:mx-0 md:px-0 pb-3 md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {testimonials.map((t) => (
             <div
               key={t.name}
-              className="bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-6 border border-primary-foreground/10"
+              className="flex-none w-[78vw] max-w-[300px] snap-start md:w-auto md:max-w-none bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-6 border border-primary-foreground/10"
             >
               <div className="flex gap-0.5 mb-3">
                 {Array.from({ length: t.rating }).map((_, i) => (
@@ -64,6 +65,11 @@ const SocialProofStrip = () => {
             </div>
           ))}
         </div>
+
+        {/* Swipe hint — mobile only */}
+        <p className="flex items-center justify-center gap-1.5 mt-4 text-xs text-primary-foreground/40 md:hidden">
+          <span>←</span> swipe to see more <span>→</span>
+        </p>
       </div>
     </section>
   );

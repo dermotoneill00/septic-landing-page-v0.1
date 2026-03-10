@@ -87,7 +87,38 @@ const InsuranceComparison = () => {
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto overflow-x-auto">
+        {/* ── Mobile: ProGuard feature checklist ── */}
+        <div className="md:hidden max-w-sm mx-auto mb-8">
+          <div className="bg-green-50 border border-green-200 rounded-2xl p-6">
+            <p className="text-center text-xs font-bold uppercase tracking-wider text-secondary mb-4">
+              ProGuard covers it all
+            </p>
+            <ul className="space-y-3">
+              {rows.map((row) => (
+                <li key={row.feature} className="flex items-start gap-3">
+                  <Check className="h-5 w-5 text-secondary shrink-0 mt-0.5" />
+                  <div>
+                    <span className="text-sm font-semibold text-foreground">{row.feature}</span>
+                    <span className="block text-xs text-muted-foreground">{row.proguard.text}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-5 pt-4 border-t border-green-200 space-y-2">
+              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                <X className="h-3.5 w-3.5 text-destructive/60 shrink-0" />
+                <span>Homeowners insurance: <strong>zero</strong> septic coverage</span>
+              </div>
+              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                <Minus className="h-3.5 w-3.5 text-amber-500 shrink-0" />
+                <span>Other warranties: typically capped at $500–$2,000</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ── Desktop: full comparison table ── */}
+        <div className="hidden md:block max-w-4xl mx-auto overflow-x-auto">
           {/* Column headers */}
           <div className="grid grid-cols-4 gap-2 mb-2 px-2 min-w-[560px]">
             <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground pt-2 pl-2">
@@ -117,21 +148,17 @@ const InsuranceComparison = () => {
                 key={i}
                 className="grid grid-cols-4 gap-2 rounded-xl overflow-hidden border border-border"
               >
-                {/* Feature label */}
                 <div className="flex items-center px-4 py-3 bg-muted/20">
                   <span className="text-xs sm:text-sm font-medium text-foreground leading-snug">
                     {row.feature}
                   </span>
                 </div>
-                {/* ProGuard */}
                 <div className="bg-green-50 border-l-2 border-green-300 font-medium text-foreground">
                   <Cell status={row.proguard.status} text={row.proguard.text} />
                 </div>
-                {/* Homeowners */}
                 <div className="bg-red-50/60 text-muted-foreground">
                   <Cell status={row.homeowners.status} text={row.homeowners.text} />
                 </div>
-                {/* Competitors */}
                 <div className="bg-red-50/60 text-muted-foreground">
                   <Cell status={row.competitors.status} text={row.competitors.text} />
                 </div>
@@ -157,7 +184,7 @@ const InsuranceComparison = () => {
           <Button
             variant="cta"
             size="lg"
-            className="h-13 px-10 text-base rounded-lg"
+            className="w-full sm:w-auto h-13 px-10 text-base rounded-lg"
             onClick={() => navigate("/enroll")}
           >
             Get ProGuard Coverage Today
