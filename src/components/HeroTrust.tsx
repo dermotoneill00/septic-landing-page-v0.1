@@ -29,7 +29,7 @@ const HeroTrust = ({ variant }: { variant?: "yellow" } = {}) => {
               America's Most Trusted Septic Plan
             </p>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-primary-foreground leading-tight mb-6">
-              27 Years Protecting Homeowners.
+              <span className="text-accent">27</span> Years Protecting Homeowners.
               <span className="block italic text-accent text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight mt-2 drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">
                 One Less Thing to Worry About.
               </span>
