@@ -26,9 +26,9 @@ const LPTrustB = () => {
       <div className="flex justify-center py-3 bg-background">
         <button
           onClick={() => setExpanded((v) => !v)}
-          className="flex items-center gap-2 text-sm font-semibold text-primary/70 hover:text-primary tracking-wide transition-colors duration-200"
+          className="flex items-center gap-2 text-lg font-semibold text-primary/70 hover:text-primary tracking-wide transition-colors duration-200"
         >
-          <span>{expanded ? "Show less" : "Click here to read more"}</span>
+          <span>{expanded ? "Show less" : "Click Here to Read More"}</span>
           <ChevronDown
             className={`h-4 w-4 transition-transform duration-300 ${expanded ? "rotate-180" : ""}`}
           />
