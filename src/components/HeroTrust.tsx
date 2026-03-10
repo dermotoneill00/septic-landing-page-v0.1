@@ -3,6 +3,7 @@ import { ShieldCheck, Star, RefreshCw, Phone } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import heroImage from "@/assets/hero-home.jpg";
 import HeroEnrollCard from "@/components/HeroEnrollCard";
+import { useGeo } from "@/contexts/GeoContext";
 
 const trustPoints = [
   { icon: ShieldCheck, text: "27 Years of Proven Protection" },
@@ -12,6 +13,16 @@ const trustPoints = [
 
 const HeroTrust = ({ variant }: { variant?: "yellow" } = {}) => {
   const navigate = useNavigate();
+  const { stateName, isCovered } = useGeo();
+
+  // Personalise copy when the visitor is in a covered service state
+  const badgeText = isCovered && stateName
+    ? `${stateName}'s Most Trusted Septic Plan`
+    : "America's Most Trusted Septic Plan";
+
+  const bodyIntro = isCovered && stateName
+    ? `Trusted by ${stateName} homeowners, ProGuard is underwritten by a nationally recognized carrier and renewed by 91% of our customers year after year, because when something breaks, we handle it.`
+    : "ProGuard is underwritten by a nationally recognized carrier and renewed by 91% of our customers year after year, because when something breaks, we handle it.";
 
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden">
@@ -26,7 +37,7 @@ const HeroTrust = ({ variant }: { variant?: "yellow" } = {}) => {
           {/* Left: trust copy */}
           <div className="animate-fade-in-up">
             <p className="text-accent font-semibold uppercase tracking-widest text-sm mb-4">
-              America's Most Trusted Septic Plan
+              {badgeText}
             </p>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-primary-foreground leading-tight mb-6">
               27 Years Protecting Homeowners.
@@ -35,8 +46,7 @@ const HeroTrust = ({ variant }: { variant?: "yellow" } = {}) => {
               </span>
             </h1>
             <p className="text-lg md:text-xl text-primary-foreground/85 mb-8 leading-relaxed max-w-xl">
-              ProGuard is underwritten by a nationally recognized carrier and renewed by 91% of
-              our customers year after year, because when something breaks, we handle it.
+              {bodyIntro}
               <br className="hidden sm:block" />
               <span className="font-semibold text-primary-foreground">Up to $25,000 in coverage. No inspection required.</span>
             </p>

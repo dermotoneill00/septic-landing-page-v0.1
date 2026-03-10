@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ProtectedRoute } from "@/components/portal/ProtectedRoute";
 import ScrollToTop from "@/components/ScrollToTop";
+import { GeoProvider } from "@/contexts/GeoContext";
 import Index from "./pages/Index";
 import Enroll from "./pages/Enroll";
 import EnrollDenied from "./pages/EnrollDenied";
@@ -46,6 +47,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <ScrollToTop />
+        <GeoProvider>
         <AuthProvider>
           <Suspense
             fallback={
@@ -139,6 +141,7 @@ const App = () => (
             </Routes>
           </Suspense>
         </AuthProvider>
+        </GeoProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
