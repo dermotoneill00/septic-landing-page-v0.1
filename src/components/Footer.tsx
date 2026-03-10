@@ -52,11 +52,11 @@ const Footer = () => {
           {/* Confirm state list: prototype has 9 states, ProGuard covers 12. Verify with coverage team before launch. */}
           <div>
             <h4 className="font-bold text-primary-foreground mb-4 text-base">Service Area</h4>
-            <div className="flex flex-wrap gap-2">
+            <div className="grid grid-cols-3 gap-2">
               {serviceStates.map((state) => (
                 <span
                   key={state}
-                  className="text-xs bg-primary-foreground/10 text-primary-foreground/80 rounded-full px-3 py-1"
+                  className="text-xs bg-primary-foreground/10 text-primary-foreground/80 rounded-full px-3 py-1.5 text-center"
                 >
                   {state}
                 </span>
