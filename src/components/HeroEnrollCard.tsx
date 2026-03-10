@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { EnrollmentData, defaultEnrollmentData, COVERED_STATES } from "@/types/enrollment";
@@ -176,9 +176,9 @@ export default function HeroEnrollCard({ variant }: { variant?: "yellow" }) {
           {step === 1 && (
             <p className={`text-center text-xs ${counterText} mb-3 leading-relaxed`}>
               By continuing, you agree to our{" "}
-              <a href="https://proguardplans.com/terms-of-use/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:opacity-80">Terms of Use</a>
+              <Link to="/legal/terms" className="underline underline-offset-2 hover:opacity-80">Terms of Use</Link>
               {" "}and{" "}
-              <a href="https://proguardplans.com/privacy-policy/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:opacity-80">Privacy Policy</a>.
+              <Link to="/legal/privacy" className="underline underline-offset-2 hover:opacity-80">Privacy Policy</Link>.
             </p>
           )}
           <div className="flex items-center justify-between">

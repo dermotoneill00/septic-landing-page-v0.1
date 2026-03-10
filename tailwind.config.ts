@@ -16,6 +16,7 @@ export default {
       fontFamily: {
         sans: ["'DM Sans'", "system-ui", "sans-serif"],
         display: ["'Playfair Display'", "serif"],
+        geist: ["'Geist Variable'", "'Geist'", "system-ui", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",

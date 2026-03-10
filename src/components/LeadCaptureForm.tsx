@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -162,9 +163,9 @@ const LeadCaptureForm = () => {
 
             <p className="text-center text-xs text-muted-foreground/70 mt-4 leading-relaxed">
               By submitting, you agree to our{" "}
-              <a href="https://proguardplans.com/terms-of-use/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-muted-foreground">Terms of Use</a>
+              <Link to="/legal/terms" className="underline underline-offset-2 hover:text-muted-foreground">Terms of Use</Link>
               {" "}and{" "}
-              <a href="https://proguardplans.com/privacy-policy/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-muted-foreground">Privacy Policy</a>.
+              <Link to="/legal/privacy" className="underline underline-offset-2 hover:text-muted-foreground">Privacy Policy</Link>.
             </p>
           </form>
         </div>

@@ -13,6 +13,8 @@ import EnrollSuccess from "./pages/EnrollSuccess";
 import LPTrust from "./pages/LPTrust";
 import LPTrustB from "./pages/LPTrustB";
 import LPFear from "./pages/LPFear";
+import Terms from "./pages/legal/Terms";
+import Privacy from "./pages/legal/Privacy";
 import NotFound from "./pages/NotFound";
 
 // Portal pages loaded lazily so Vite transforms them on first navigation,
@@ -59,6 +61,8 @@ const App = () => (
               <Route path="/lp/trust" element={<LPTrust />} />
               <Route path="/lp/trust-b" element={<LPTrustB />} />
               <Route path="/lp/fear" element={<LPFear />} />
+              <Route path="/legal/terms" element={<Terms />} />
+              <Route path="/legal/privacy" element={<Privacy />} />
 
               {/* ── Customer portal ── */}
               <Route path="/portal" element={<Navigate to="/portal/login" replace />} />
