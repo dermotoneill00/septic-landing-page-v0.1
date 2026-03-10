@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { AlertTriangle } from "lucide-react";
+import { AlertTriangle, Phone } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import heroImage from "@/assets/hero-home.jpg";
 import HeroEnrollCard from "@/components/HeroEnrollCard";
@@ -43,13 +43,27 @@ const HeroFear = () => {
             </p>
 
             {/* Fear stats */}
-            <div className="grid grid-cols-3 gap-4 max-w-lg mb-8">
+            <div className="grid grid-cols-3 gap-4 max-w-lg mb-6">
               {stats.map(({ value, label }) => (
                 <div key={label} className="bg-white/5 border border-white/10 rounded-xl p-4 text-center">
                   <div className="text-[#F5C842] font-bold text-xl mb-1 leading-tight">{value}</div>
                   <div className="text-white/50 text-xs leading-tight">{label}</div>
                 </div>
               ))}
+            </div>
+
+            {/* Phone number */}
+            <div className="flex items-center gap-2 mb-8">
+              <div className="w-8 h-8 rounded-full bg-[#F5C842]/20 flex items-center justify-center shrink-0">
+                <Phone className="h-4 w-4 text-[#F5C842]" />
+              </div>
+              <span className="text-white/80 text-sm font-medium">
+                Call us:{" "}
+                <a href="tel:8883540677" className="font-semibold text-white hover:text-[#F5C842] transition-colors">
+                  (888) 354-0677
+                </a>
+                <span className="text-white/50 ml-1">· Mon–Fri 8am–6pm EST</span>
+              </span>
             </div>
 
             {/* Mobile CTA — hidden on lg where the card is visible */}

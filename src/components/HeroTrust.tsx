@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ShieldCheck, Star, RefreshCw } from "lucide-react";
+import { ShieldCheck, Star, RefreshCw, Phone } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import heroImage from "@/assets/hero-home.jpg";
 import HeroEnrollCard from "@/components/HeroEnrollCard";
@@ -41,7 +41,7 @@ const HeroTrust = ({ variant }: { variant?: "yellow" } = {}) => {
               <span className="font-semibold text-primary-foreground">Up to $25,000 in coverage. No inspection required.</span>
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-5 mb-8">
+            <div className="flex flex-col sm:flex-row gap-5 mb-6">
               {trustPoints.map(({ icon: Icon, text }) => (
                 <div key={text} className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center shrink-0">
@@ -50,6 +50,20 @@ const HeroTrust = ({ variant }: { variant?: "yellow" } = {}) => {
                   <span className="text-primary-foreground/80 text-sm font-medium">{text}</span>
                 </div>
               ))}
+            </div>
+
+            {/* Phone number */}
+            <div className="flex items-center gap-2 mb-8">
+              <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center shrink-0">
+                <Phone className="h-4 w-4 text-accent" />
+              </div>
+              <span className="text-primary-foreground/80 text-sm font-medium">
+                Call us:{" "}
+                <a href="tel:8883540677" className="font-semibold text-primary-foreground hover:text-accent transition-colors">
+                  (888) 354-0677
+                </a>
+                <span className="text-primary-foreground/50 ml-1">· Mon–Fri 8am–6pm EST</span>
+              </span>
             </div>
 
             {/* CTA — shown on mobile/tablet; on lg the inline card is visible instead */}
