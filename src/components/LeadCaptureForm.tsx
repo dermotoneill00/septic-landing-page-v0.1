@@ -159,6 +159,13 @@ const LeadCaptureForm = () => {
                 <Clock className="h-4 w-4 text-secondary" /> Takes less than 60 seconds
               </span>
             </div>
+
+            <p className="text-center text-xs text-muted-foreground/70 mt-4 leading-relaxed">
+              By submitting, you agree to our{" "}
+              <a href="https://proguardplans.com/terms-of-use/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-muted-foreground">Terms of Use</a>
+              {" "}and{" "}
+              <a href="https://proguardplans.com/privacy-policy/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-muted-foreground">Privacy Policy</a>.
+            </p>
           </form>
         </div>
       </div>

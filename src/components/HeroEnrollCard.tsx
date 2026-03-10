@@ -172,24 +172,34 @@ export default function HeroEnrollCard({ variant }: { variant?: "yellow" }) {
 
       {/* Navigation — steps 1–5 only */}
       {step < 6 && (
-        <div className={`px-5 pb-5 pt-3 flex items-center justify-between border-t ${divider}`}>
-          <Button
-            variant="ghost"
-            onClick={handleBack}
-            disabled={step === 1}
-            className={backClass}
-          >
-            <ChevronLeft className="w-4 h-4 mr-1" />
-            Back
-          </Button>
-          <Button
-            onClick={handleNext}
-            disabled={!ok}
-            className={nextClass}
-          >
-            Next
-            <ChevronRight className="w-4 h-4 ml-1" />
-          </Button>
+        <div className={`px-5 pb-5 pt-3 border-t ${divider}`}>
+          {step === 1 && (
+            <p className={`text-center text-xs ${counterText} mb-3 leading-relaxed`}>
+              By continuing, you agree to our{" "}
+              <a href="https://proguardplans.com/terms-of-use/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:opacity-80">Terms of Use</a>
+              {" "}and{" "}
+              <a href="https://proguardplans.com/privacy-policy/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:opacity-80">Privacy Policy</a>.
+            </p>
+          )}
+          <div className="flex items-center justify-between">
+            <Button
+              variant="ghost"
+              onClick={handleBack}
+              disabled={step === 1}
+              className={backClass}
+            >
+              <ChevronLeft className="w-4 h-4 mr-1" />
+              Back
+            </Button>
+            <Button
+              onClick={handleNext}
+              disabled={!ok}
+              className={nextClass}
+            >
+              Next
+              <ChevronRight className="w-4 h-4 ml-1" />
+            </Button>
+          </div>
         </div>
       )}
 

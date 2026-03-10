@@ -70,10 +70,10 @@ const Footer = () => {
             © {new Date().getFullYear()} ProGuard Plans. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm">
-            <a href="#" className="text-primary-foreground/50 hover:text-primary-foreground/80 transition-colors">
+            <a href="https://proguardplans.com/privacy-policy/" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/50 hover:text-primary-foreground/80 transition-colors">
               Privacy Policy
             </a>
-            <a href="#" className="text-primary-foreground/50 hover:text-primary-foreground/80 transition-colors">
+            <a href="https://proguardplans.com/terms-of-use/" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/50 hover:text-primary-foreground/80 transition-colors">
               Terms of Service
             </a>
           </div>
